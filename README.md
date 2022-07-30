@@ -14,37 +14,34 @@ This is an Effector new version of [https://demo.realworld.io/]
 - [Prettier](https://prettier.io)
 - [Polyfills](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy#readme)
 
-## Getting started
+## Getting started (Project initialisation)
 
-1. Access the project directory.
+1) __Copy .env and adjust env vars if necessary__
+```bash
+$  cp .env.local.example .env.local
+```
 
-   ```bash
-   cd my-app
-   ```
 
-2. Initialize a git repository.
+2) Install dependencies.
+```bash
+$  pnpm i
+```
 
-   ```bash
-   git init
-   ```
+3) Start dev server with hot reload at http://localhost:3000.
+```bash
+$  pnpm run dev
+```
 
-3. Install dependencies.
-
-   ```bash
-   pnpm i
-   ```
-
-4. Start dev server with hot reload at http://localhost:3000.
-   ```bash
-   pnpm run dev
-   ```
+## You can also start dev server using Docker and then open it at http://0.0.0.0:4200 .
+```bash
+$  docker-compose up
+```
 
 ## Recommended VS Code extensions
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-## Other commands
 
 ### Lint commands
 

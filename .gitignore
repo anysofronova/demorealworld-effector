@@ -1,7 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/jetbrains,macos,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=jetbrains,macos,node
 
-# Local .env files
+# Local .env.local files
 *.local
 
 # Vite
@@ -149,7 +149,7 @@ node_modules/
 *.tgz
 
 # dotenv environment variables file
-.env
+.env.local
 .env.test
 .env.production
 
