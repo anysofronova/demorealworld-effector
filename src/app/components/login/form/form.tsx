@@ -2,7 +2,6 @@ import styles from './form.module.scss'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { IForm, IInputs } from './form.types'
-import Socials from '@/app/components/login/socials/socials'
 
 const Form: FC<IForm> = ({ title, subTitle, isSignUp, buttonText, error }) => {
   const {
@@ -14,18 +13,7 @@ const Form: FC<IForm> = ({ title, subTitle, isSignUp, buttonText, error }) => {
   return (
     <form onSubmit={handleSubmit(onSign)} className={styles.form}>
       <h2>{title}</h2>
-      <Socials />
       <span>{subTitle}</span>
-      {isSignUp && (
-        <input
-          {...register('name', {
-            required: true,
-            pattern: /[a-zA-zа-яА-Я]/gi,
-            maxLength: 30,
-          })}
-          placeholder={'Name'}
-        />
-      )}
       <input
         {...register('email', {
           required: true,
@@ -44,9 +32,6 @@ const Form: FC<IForm> = ({ title, subTitle, isSignUp, buttonText, error }) => {
       />
       <button className={'button'}>{buttonText}</button>
       <div className={styles.errors}>
-        {isSignUp && errors?.name?.type === 'maxLength' && (
-          <p>Name cannot exceed 30 characters</p>
-        )}
         {isSignUp &&
           (errors?.password?.type === 'minLength' ||
             errors?.password?.type === 'maxLength') && (
@@ -56,8 +41,7 @@ const Form: FC<IForm> = ({ title, subTitle, isSignUp, buttonText, error }) => {
             </p>
           )}
         {errors?.email?.type === 'pattern' && <p>Please enter a valid Email</p>}
-        {(errors?.name?.type === 'required' ||
-          errors?.email?.type === 'required' ||
+        {(errors?.email?.type === 'required' ||
           errors?.password?.type === 'required') && (
           <p>The fields are required</p>
         )}
