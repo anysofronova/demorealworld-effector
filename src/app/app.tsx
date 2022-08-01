@@ -1,32 +1,25 @@
 import './styles/global.css'
-import { useStore } from 'effector-react'
-import { useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
 
-import { getAllArticlesFx } from '@/app/model/effect'
-import { $articles } from '@/app/model/model'
-import { Login } from '@/pages/login'
+import { Suspense } from 'react'
+// import { useStore } from 'effector-react'
+// import { lazy, useEffect } from 'react'
+import { Route, RouteObject, Routes, useRoutes } from 'react-router-dom'
+
+import { appRouting } from '@/app/routing/appRouting'
+// import { getAllArticlesFx } from '@/app/model/effect'
+// import { $articles } from '@/app/model/model'
 import { routes } from '@/app/routing/routes'
-import MainLayout from '@/app/components/layouts/MainLayout'
-import { Home } from '@/pages/home'
+import { namedLazy } from '@/shared/utils/namedLazy'
 
 export const Application = () => {
-  const articles = useStore($articles)
-  useEffect(() => {
-    getAllArticlesFx()
-  }, [])
-
-  useEffect(() => {
-    console.log(articles)
-  }, [articles])
-
-  return (
-    <Routes>
-      <Route path={'/'} element={<MainLayout />}>
-        <Route path={routes.LOGIN} element={<Login />} />
-        <Route path={routes.HOME} element={<Home />} />
-      </Route>
-      <Route path={'*'} element={<Home />} />
-    </Routes>
-  )
+  // const articles = useStore($articles)
+  // useEffect(() => {
+  //   getAllArticlesFx()
+  // }, [])
+  //
+  // useEffect(() => {
+  //   console.log(articles)
+  // }, [articles])
+  const appRoutes = useRoutes(appRouting)
+  return <>{appRoutes}</>
 }
