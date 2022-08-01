@@ -43,6 +43,7 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "@types/yup": "^0.29.14",
     "axios": "^0.27.2",
+    "clsx": "^1.2.1",
     "effector": "^22.3.0",
     "effector-react": "^22.1.5",
     "js-cookie": "^3.0.1",
