@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 import { API_ROOT } from '@/app/config/constants'
-import { routes } from '@/app/routes/routes'
+import { routes } from '@/app/routing/routes'
 
 import * as types from './types'
 
