@@ -28,6 +28,7 @@ export const Form: FC<IForm> = ({ title, subTitle, error }) => {
         <h2 className={'text-xl font-medium'}>{title}</h2>
         <div
           className={'font-light text-sm text-indigo-600 cursor-pointer'}
+          aria-hidden="true"
           onClick={() =>
             navigate(isSignUp ? routes.LOGIN : routes.REGISTER, {
               replace: true,

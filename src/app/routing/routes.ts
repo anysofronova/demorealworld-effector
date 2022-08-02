@@ -1,7 +1,7 @@
 export const routes = {
-  HOME: 'home',
-  LOGIN: 'login',
-  REGISTER: 'register',
+  HOME: '/home',
+  LOGIN: '/login',
+  REGISTER: '/register',
   SETTINGS: 'settings',
   EDITOR_PAGE: 'editor',
   EDITOR_BY_SLUG: 'editor/:slug',
