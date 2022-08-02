@@ -1,5 +1,6 @@
 import { RouteObject } from 'react-router-dom'
 
+import { PrivateRoute } from '@/app/routing/private-route'
 import { routes } from '@/app/routing/routes'
 import { Suspensy } from '@/shared/ui/suspensy'
 import { namedLazy } from '@/shared/utils/namedLazy'
@@ -11,7 +12,9 @@ export const homeRouting: RouteObject[] = [
     path: routes.HOME,
     element: (
       <Suspensy>
-        <Home />
+        <PrivateRoute>
+          <Home />
+        </PrivateRoute>
       </Suspensy>
     ),
   },
