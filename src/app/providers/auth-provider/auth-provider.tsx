@@ -7,9 +7,7 @@ import {
   useState,
 } from 'react'
 import { useLocation } from 'react-use'
-
 import AuthService from '@/app/services/auth/auth.service'
-
 import { IContext, UserState } from './auth.interface'
 
 export const AuthContext = createContext({} as IContext)
