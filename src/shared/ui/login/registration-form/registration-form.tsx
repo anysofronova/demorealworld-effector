@@ -17,8 +17,10 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
     handleSubmit,
     formState: { errors, isValid, isDirty },
   } = useForm<RegistrationFormFields>()
-
+  const { pathname } = useLocation()
+  const isSignUp = pathname === '/register'
   const navigate = useNavigate()
+
   const onSubmit: SubmitHandler<RegistrationFormFields> = useCallback(
     async (data) => {
       try {
@@ -38,11 +40,8 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
         toast.error(String(errorMessage))
       }
     },
-    [],
+    [isSignUp, navigate],
   )
-
-  const { pathname } = useLocation()
-  const isSignUp = pathname === '/register'
 
   return (
     <div className={'flex w-full justify-center py-8 px-4'}>

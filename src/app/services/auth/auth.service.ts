@@ -8,10 +8,12 @@ import { IAuthResponse } from '@/shared/interfaces/user.interface'
 
 class AuthService {
   async login(email: string, password: string) {
-    const response = await axiosClassic.post<IAuthResponse>(ApiResponse.LOGIN, {
-      email,
-      password,
-    })
+    const response = await axiosClassic.post<DataResult<IAuthResponse>>(
+      ApiResponse.LOGIN,
+      {
+        user: { email, password },
+      },
+    )
 
     if (response.data.user.token) {
       saveToStorage(response.data)
@@ -21,12 +23,10 @@ class AuthService {
   }
 
   async register(username: string, email: string, password: string) {
-    const response = await axiosClassic.post<IAuthResponse>(
+    const response = await axiosClassic.post<DataResult<IAuthResponse>>(
       ApiResponse.REGISTER,
       {
-        username,
-        email,
-        password,
+        user: { username, email, password },
       },
     )
 

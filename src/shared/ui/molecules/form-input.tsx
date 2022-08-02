@@ -27,12 +27,11 @@ export const FormInput = <TFormValues extends Record<string, unknown>>({
   className,
   ...props
 }: FormInputProps<TFormValues>): JSX.Element => {
-  // If the name is in a FieldArray, it will be 'fields.index.ts.fieldName' and errors[name] won't return anything, so we are using lodash get
   const errorMessages = get(errors, name)
   const hasError = Boolean(errors && errorMessages)
 
   return (
-    <div className={classNames('', className)} aria-live="polite">
+    <div className={classNames('w-full', className)} aria-live="polite">
       <Input
         name={name}
         aria-invalid={hasError}
@@ -45,7 +44,6 @@ export const FormInput = <TFormValues extends Record<string, unknown>>({
       />
       <ErrorMessage
         errors={errors}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         name={name as any}
         render={({ message }) => (
           <FormErrorMessage className="mt-1">{message}</FormErrorMessage>
