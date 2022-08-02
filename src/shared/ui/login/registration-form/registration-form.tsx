@@ -1,24 +1,27 @@
-import { FC } from 'react'
-import { useForm } from 'react-hook-form'
-import { IForm, RegistrationFormFields } from './registrationForm.types'
-import { useLocation } from 'react-use'
-import { routes } from '@/app/routing/routes'
+import { FC, useCallback } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { FormInput } from '@/shared/ui/login/registrationForm/formInput'
+import { useLocation } from 'react-use'
 
-export const emailPattern = {
-  value: new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$', 'ig'),
-  message: 'Enter a valid email address.',
-}
+import { routes } from '@/app/routing/routes'
+import { FormInput } from '@/shared/ui/molecules'
+import { FormPassword } from '@/shared/ui/molecules/form-password'
+
+import { IForm, RegistrationFormFields } from './registration-form.types'
 
 export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid, isDirty },
   } = useForm<RegistrationFormFields>()
 
-  const onSubmit = handleSubmit((data) => console.log('submitting...', data))
+  const onSubmit: SubmitHandler<RegistrationFormFields> = useCallback(
+    (data) => {
+      console.log('submitting...', data)
+    },
+    [],
+  )
 
   const { pathname } = useLocation()
   const isSignUp = pathname === '/register'
@@ -26,10 +29,10 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
   return (
     <div className={'flex w-full justify-center py-8 px-4'}>
       <form
-        onSubmit={onSubmit}
         className={
           'flex flex-col justify-center items-center border shadow-md rounded-md p-8 gap-4 sm:w-3/4 max-w-[800px] w-full'
         }
+        onSubmit={handleSubmit(onSubmit)}
       >
         <h2 className={'text-xl font-medium'}>{title}</h2>
         <Link
@@ -44,16 +47,11 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
             id="name"
             type="text"
             name="name"
-            placeholder="Name"
+            label="Name"
+            placeholder="Enter Name"
             className="mb-2"
             register={register}
-            rules={{
-              required: 'You must enter your Name.',
-              minLength: {
-                value: 6,
-                message: 'Name cannot be shorter than 6 characters',
-              },
-            }}
+            rules={{ required: 'You must enter your name.' }}
             errors={errors}
           />
         )}
@@ -62,35 +60,28 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
           id="email"
           type="email"
           name="email"
-          label="Email Address"
+          label="Email"
           placeholder="Email"
           className="mb-2"
           register={register}
-          rules={{
-            required: 'You must enter your email address.',
-            pattern: emailPattern,
-          }}
+          rules={{ required: 'You must enter your email.' }}
           errors={errors}
         />
 
-        <FormInput<RegistrationFormFields>
+        <FormPassword<RegistrationFormFields>
           id="password"
           type="password"
           name="password"
+          label="Password"
           placeholder="Password"
           className="mb-2"
           register={register}
-          rules={{
-            required: 'You must enter your Password.',
-            minLength: {
-              value: 6,
-              message: 'Password cannot be shorter than 6 characters',
-            },
-          }}
+          rules={{ required: 'You must enter your password.' }}
           errors={errors}
         />
 
         <button
+          disabled={!isDirty && !isValid}
           className="mt-4 py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
           type="submit"
         >
