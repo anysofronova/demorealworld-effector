@@ -35,7 +35,7 @@ export const FormTextarea = <TFormValues extends Record<string, any>>({
   className,
   ...props
 }: FormTextareaProps<TFormValues>): JSX.Element => {
-  // If the name is in a FieldArray, it will be 'fields.index.fieldName' and errors[name] won't return anything, so we are using lodash get
+  // If the name is in a FieldArray, it will be 'fields.index.ts.fieldName' and errors[name] won't return anything, so we are using lodash get
   const errorMessages = get(errors, name)
   const hasError = Boolean(errors && errorMessages)
 

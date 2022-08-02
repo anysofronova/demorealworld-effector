@@ -9,6 +9,7 @@ const Home = namedLazy(() => import('@/pages/home'), 'Home')
 export const homeRouting: RouteObject[] = [
   {
     path: routes.HOME,
+    index: true,
     element: (
       <Suspensy>
         <Home />

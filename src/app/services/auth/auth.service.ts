@@ -20,10 +20,11 @@ class AuthService {
     return response.data
   }
 
-  async register(email: string, password: string) {
+  async register(username: string, email: string, password: string) {
     const response = await axiosClassic.post<IAuthResponse>(
       ApiResponse.REGISTER,
       {
+        username,
         email,
         password,
       },
