@@ -24,11 +24,11 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
   const isSignUp = pathname === '/register'
 
   return (
-    <div className={'flex w-full justify-center py-8'}>
+    <div className={'flex w-full justify-center py-8 px-4'}>
       <form
         onSubmit={onSubmit}
         className={
-          'flex flex-col justify-center items-center border shadow-md rounded-md p-8 gap-4 w-3/4 max-w-[800px]'
+          'flex flex-col justify-center items-center border shadow-md rounded-md p-8 gap-4 sm:w-3/4 max-w-[800px] w-full'
         }
       >
         <h2 className={'text-xl font-medium'}>{title}</h2>

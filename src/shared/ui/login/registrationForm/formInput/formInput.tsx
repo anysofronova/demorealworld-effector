@@ -18,7 +18,7 @@ export const FormInput = <TFormValues extends Record<string, unknown>>({
   const hasError = !!(errors && errorMessages)
   console.log(errors)
   return (
-    <div className={clsx('w-2/3 ', className)} aria-live="polite">
+    <div className={clsx('sm:w-2/3 w-full', className)} aria-live="polite">
       <Input
         name={name}
         aria-invalid={hasError}
