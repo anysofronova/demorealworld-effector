@@ -9,3 +9,8 @@ export interface IUser {
 export interface IAuthResponse {
   user: IUser
 }
+
+type DataResult<T> = {
+  success: boolean
+  errors?: { [P in keyof T]?: string[] }
+}

@@ -33,7 +33,7 @@ export const FormPassword = <TFormValues extends Record<string, unknown>>({
   const hasError = Boolean(errors && errorMessages)
 
   return (
-    <div className={classNames('', className)} aria-live="polite">
+    <div className={classNames('w-full', className)} aria-live="polite">
       <PasswordInput
         name={name}
         type="password"

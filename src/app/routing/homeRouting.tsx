@@ -14,5 +14,6 @@ export const homeRouting: RouteObject[] = [
         <Home />
       </Suspensy>
     ),
+    index: true,
   },
 ]
