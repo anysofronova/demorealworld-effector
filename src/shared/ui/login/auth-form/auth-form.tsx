@@ -6,22 +6,25 @@ import { useLocation } from 'react-use'
 
 import { routes } from '@/app/routing/routes'
 import AuthService from '@/app/services/auth/auth.service'
+import { useAuth } from '@/shared/hooks/useAuth'
+import { CircleIcon } from '@/shared/ui'
 import { FormInput } from '@/shared/ui/molecules'
 import { FormPassword } from '@/shared/ui/molecules/form-password'
 
-import { IForm, RegistrationFormFields } from './registration-form.types'
+import { AuthFormFields, IForm } from './auth-form.types'
 
-export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
+export const AuthForm: FC<IForm> = ({ title, subTitle }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isDirty },
-  } = useForm<RegistrationFormFields>()
+    formState: { errors, isValid, isDirty, isSubmitting },
+  } = useForm<AuthFormFields>()
   const { pathname } = useLocation()
+  const { user, setUser } = useAuth()
   const isSignUp = pathname === '/register'
   const navigate = useNavigate()
 
-  const onSubmit: SubmitHandler<RegistrationFormFields> = useCallback(
+  const onSubmit: SubmitHandler<AuthFormFields> = useCallback(
     async (data) => {
       try {
         const response = isSignUp
@@ -32,6 +35,7 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
             )
           : await AuthService.login(data.email, data.password)
         if (response.user) {
+          setUser(response.user)
           toast.success('Successful authorization!')
           navigate(routes.HOME)
         }
@@ -40,7 +44,7 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
         toast.error(errorMessage ? String(errorMessage) : 'Error')
       }
     },
-    [isSignUp, navigate],
+    [isSignUp, navigate, setUser],
   )
 
   return (
@@ -60,7 +64,7 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
           {subTitle}
         </Link>
         {isSignUp && (
-          <FormInput<RegistrationFormFields>
+          <FormInput<AuthFormFields>
             id="username"
             type="text"
             name="username"
@@ -73,7 +77,7 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
           />
         )}
 
-        <FormInput<RegistrationFormFields>
+        <FormInput<AuthFormFields>
           id="email"
           type="email"
           name="email"
@@ -85,7 +89,7 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
           errors={errors}
         />
 
-        <FormPassword<RegistrationFormFields>
+        <FormPassword<AuthFormFields>
           id="password"
           type="password"
           name="password"
@@ -99,10 +103,17 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
 
         <button
           disabled={!isDirty && !isValid}
-          className="mt-4 py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+          className="mt-4 py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-25"
           type="submit"
         >
-          {title}
+          {isSubmitting ? (
+            <div>
+              <CircleIcon />
+              Loading...
+            </div>
+          ) : (
+            title
+          )}
         </button>
       </form>
     </div>

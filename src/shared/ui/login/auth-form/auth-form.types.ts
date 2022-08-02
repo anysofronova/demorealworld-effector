@@ -1,4 +1,4 @@
-export type RegistrationFormFields = {
+export type AuthFormFields = {
   username?: string
   email: string
   password: string

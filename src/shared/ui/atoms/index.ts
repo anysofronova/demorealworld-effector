@@ -1,3 +1,4 @@
+export * from './circle-icon'
 export * from './close-icon'
 export * from './container'
 export * from './open-icon'
