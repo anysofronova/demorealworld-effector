@@ -9,7 +9,7 @@ import * as types from './types'
 export const API_URL = API_ROOT ?? 'https://api.realworld.io/api-docs/'
 
 export const getContentType = () => ({
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json;charset=UTF-8',
 })
 
 export const axiosClassic = axios.create({
