@@ -37,7 +37,7 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
         }
       } catch (error: any) {
         const [errorMessage] = Object.values(error.response.data.errors)
-        toast.error(String(errorMessage))
+        toast.error(errorMessage ? String(errorMessage) : 'Error')
       }
     },
     [isSignUp, navigate],

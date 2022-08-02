@@ -16,7 +16,7 @@ export const Header = () => {
     <div className="relative bg-white">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-between md:space-x-10">
-          <div className="flex justify-start">
+          <div className="flex">
             <Link to={routes.HOME} className="flex">
               <span className="sr-only">Workflow</span>
               <img
@@ -38,10 +38,12 @@ export const Header = () => {
             </button>
           </div>
           {isLoggedIn ? (
-            <UserSettings user={user} />
+            <div className="hidden md:block w-full">
+              <UserSettings user={user} setMode={setMode} />
+            </div>
           ) : (
-            <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
-              <nav className="hidden md:flex space-x-10 flex-1">
+            <div className="justify-between items-center hidden md:flex md:space-x-10 w-full">
+              <nav className="hidden md:flex space-x-10">
                 <Link
                   to={routes.HOME}
                   className="text-base font-medium text-gray-500 hover:text-gray-900"
@@ -96,11 +98,13 @@ export const Header = () => {
               </div>
             </div>
           </div>
-          <div className="py-6 px-5 space-y-6">
+          <div className="py-6 px-5 space-y-6 md:py-1">
             {isLoggedIn ? (
-              <UserSettings user={user} />
+              <div>
+                <UserSettings user={user} setMode={setMode} />
+              </div>
             ) : (
-              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50 p-4">
                 <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                   <Link
                     to={routes.HOME}
