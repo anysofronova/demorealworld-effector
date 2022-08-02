@@ -10,7 +10,7 @@ interface PropType {
 export const PrivateRoute: FC<PropType> = ({ children }) => {
   const { user } = useAuth()
   if (!user) {
-    return <Navigate to="/" />
+    return <Navigate to="/login" />
   }
   return children
 }

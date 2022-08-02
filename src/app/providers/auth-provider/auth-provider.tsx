@@ -6,7 +6,6 @@ import {
   useEffect,
   useState,
 } from 'react'
-import { useLocation } from 'react-use'
 import AuthService from '@/app/services/auth/auth.service'
 import { IContext, UserState } from './auth.interface'
 
@@ -14,8 +13,6 @@ export const AuthContext = createContext({} as IContext)
 
 export const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   const [user, setUser] = useState<UserState | null>(null)
-
-  const { pathname } = useLocation()
 
   useEffect(() => {
     const accessToken = Cookies.get('accessToken')
@@ -33,7 +30,7 @@ export const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
       AuthService.logout()
       setUser(null)
     }
-  }, [pathname, user])
+  }, [user])
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

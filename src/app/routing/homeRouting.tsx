@@ -18,6 +18,5 @@ export const homeRouting: RouteObject[] = [
         </PrivateRoute>
       </Suspensy>
     ),
-    index: true,
   },
 ]
