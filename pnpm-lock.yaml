@@ -6,6 +6,7 @@ specifiers:
   '@commitlint/cz-commitlint': ^17.0.3
   '@cypress/vite-dev-server': ^3.0.0
   '@headlessui/react': ^1.6.6
+  '@hookform/error-message': ^2.0.0
   '@hookform/resolvers': ^2.9.7
   '@tailwindcss/aspect-ratio': ^0.4.0
   '@tailwindcss/forms': ^0.5.2
@@ -16,6 +17,7 @@ specifiers:
   '@testing-library/user-event': ^14.3.0
   '@types/jest': ^28.1.6
   '@types/js-cookie': ^3.0.2
+  '@types/lodash.get': ^4.4.7
   '@types/node': ^18.6.2
   '@types/react': ^18.0.15
   '@types/react-dom': ^18.0.6
@@ -55,6 +57,7 @@ specifiers:
   jest-environment-jsdom: ^28.1.3
   js-cookie: ^3.0.1
   lint-staged: ^13.0.3
+  lodash.get: ^4.4.2
   patronum: ^1.9.0
   postcss: ^8.4.14
   prettier: ^2.7.1
@@ -79,6 +82,7 @@ specifiers:
 
 dependencies:
   '@headlessui/react': 1.6.6_biqbaboplfbrettd7655fr4n2y
+  '@hookform/error-message': 2.0.0_rqvpe6ry6xbxbw3uay6gz3efqe
   '@hookform/resolvers': 2.9.7_react-hook-form@7.34.0
   '@types/testing-library__jest-dom': 5.14.5
   '@types/yup': 0.29.14
@@ -87,6 +91,7 @@ dependencies:
   effector: 22.3.0
   effector-react: 22.1.5_fqnc2pqlfbgfkkbezvfttjatja
   js-cookie: 3.0.1
+  lodash.get: 4.4.2
   patronum: 1.9.0_effector@22.3.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -113,6 +118,7 @@ devDependencies:
   '@testing-library/user-event': 14.3.0_gwcpuyfvwbszhlmedmugzivgzu
   '@types/jest': 28.1.6
   '@types/js-cookie': 3.0.2
+  '@types/lodash.get': 4.4.7
   '@types/node': 18.6.2
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
@@ -837,6 +843,18 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
+  /@hookform/error-message/2.0.0_rqvpe6ry6xbxbw3uay6gz3efqe:
+    resolution: {integrity: sha512-Y90nHzjgL2MP7GFy75kscdvxrCTjtyxGmOLLxX14nd08OXRIh9lMH/y9Kpdo0p1IPowJBiZMHyueg7p+yrqynQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+      react-hook-form: ^7.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-hook-form: 7.34.0_react@18.2.0
+    dev: false
+
   /@hookform/resolvers/2.9.7_react-hook-form@7.34.0:
     resolution: {integrity: sha512-BloehX3MOLwuFEwT4yZnmolPjVmqyn8VsSuodLfazbCIqxBHsQ4qUZsi+bvNNCduRli1AGWFrkDLGD5QoNzsoA==}
     peerDependencies:
@@ -1402,9 +1420,14 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
+  /@types/lodash.get/4.4.7:
+    resolution: {integrity: sha512-af34Mj+KdDeuzsJBxc/XeTtOx0SZHZNLd+hdrn+PcKGQs0EG2TJTzQAOTCZTgDJCArahlCzLWSy8c2w59JRz7Q==}
+    dependencies:
+      '@types/lodash': 4.14.182
+    dev: true
+
   /@types/lodash/4.14.182:
     resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
-    dev: false
 
   /@types/minimatch/3.0.5:
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
@@ -5487,6 +5510,10 @@ packages:
   /lodash.castarray/4.4.0:
     resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
     dev: true
+
+  /lodash.get/4.4.2:
+    resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+    dev: false
 
   /lodash.isplainobject/4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}

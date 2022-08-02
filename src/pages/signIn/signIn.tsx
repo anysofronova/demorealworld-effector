@@ -1,5 +1,5 @@
-import { Form } from '@/shared/ui/login/form/form'
+import { RegistrationForm } from '@/shared/ui/login/registrationForm'
 
 export const SignIn = () => {
-  return <Form title={'Sign in'} subTitle={'Need an account?'} />
+  return <RegistrationForm title={'Sign in'} subTitle={'Need an account?'} />
 }
