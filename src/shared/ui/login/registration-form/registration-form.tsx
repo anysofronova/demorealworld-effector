@@ -1,12 +1,14 @@
 import { FC, useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useLocation } from 'react-use'
-import AuthService from '@/app/services/auth/auth.service'
+
 import { routes } from '@/app/routing/routes'
+import AuthService from '@/app/services/auth/auth.service'
 import { FormInput } from '@/shared/ui/molecules'
 import { FormPassword } from '@/shared/ui/molecules/form-password'
-import { toast } from 'react-toastify'
+
 import { IForm, RegistrationFormFields } from './registration-form.types'
 
 export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
@@ -15,8 +17,10 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
     handleSubmit,
     formState: { errors, isValid, isDirty },
   } = useForm<RegistrationFormFields>()
-
+  const { pathname } = useLocation()
+  const isSignUp = pathname === '/register'
   const navigate = useNavigate()
+
   const onSubmit: SubmitHandler<RegistrationFormFields> = useCallback(
     async (data) => {
       try {
@@ -36,11 +40,8 @@ export const RegistrationForm: FC<IForm> = ({ title, subTitle }) => {
         toast.error(String(errorMessage))
       }
     },
-    [],
+    [isSignUp, navigate],
   )
-
-  const { pathname } = useLocation()
-  const isSignUp = pathname === '/register'
 
   return (
     <div className={'flex w-full justify-center py-8 px-4'}>
