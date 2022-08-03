@@ -47,7 +47,7 @@ export const MobileHeader = ({
               <UserSettings user={user} disableMode={disableMode} />
             </div>
           ) : (
-            <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50 p-4">
+            <div className="flex flex-col rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50 p-4 gap-4">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                 <Link
                   to={routes.HOME_PAGE}
