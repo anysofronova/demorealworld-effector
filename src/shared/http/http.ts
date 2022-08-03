@@ -22,6 +22,16 @@ export const instance = axios.create({
   headers: getContentType(),
 })
 
+instance.interceptors.request.use((config) => {
+  const accessToken = Cookies.get('accessToken')
+
+  if (config.headers && accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`
+  }
+
+  return config
+})
+
 instance.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -34,16 +44,6 @@ instance.interceptors.response.use(
   },
 )
 
-export const setToken = (token: string): void => {
-  instance.defaults.headers.common.Authorization = `Token ${token}`
-}
-
-const token = Cookies.get('accessToken')
-
-const config = {
-  headers: { Authorization: `Bearer ${token}` },
-}
-
 export const request = <T = void>(
   options: types.HttpRequestOptions,
 ): Promise<T> => {
@@ -51,7 +51,6 @@ export const request = <T = void>(
     .request({
       url: options.url,
       method: options.method,
-      headers: { ...config.headers },
       data: options?.data,
     })
     .then((response) => response.data)

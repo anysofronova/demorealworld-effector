@@ -28,6 +28,7 @@ export const SettingsForm = () => {
     mode: 'onChange',
     resolver: yupResolver(settingsFormSchema),
   })
+
   const navigate = useNavigate()
   const onSubmit: SubmitHandler<SettingsFormFields> = useCallback(
     async (data) => {
@@ -48,6 +49,7 @@ export const SettingsForm = () => {
   useEffect(() => {
     getProfileInfoFx()
   }, [])
+
   const loading = useStore(getProfileInfoFx.pending)
   useEffect(() => {
     if (profileInfo?.user) {

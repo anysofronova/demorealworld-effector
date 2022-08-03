@@ -10,11 +10,6 @@ type UserSettingsProps = {
 }
 
 export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
-  const checkImgSrc = (src: string) => {
-    const img = new Image()
-    img.src = src
-    return !!img.onload
-  }
   return (
     <div className="flex flex-col gap-3 md:items-center w-full md:justify-between md:flex-row">
       <div className="flex self-start">
@@ -49,17 +44,11 @@ export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
           onClick={disableMode}
         >
           {user?.image && (
-            <div className="w-8 h-8 overflow-hidden">
-              <img
-                className="h-full w-full rounded-full object-cover"
-                src={
-                  checkImgSrc(user.image)
-                    ? user.image
-                    : 'https://www.pulsar-agency.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png'
-                }
-                alt="Profile"
-              />
-            </div>
+            <img
+              className="w-10 h-10 rounded-full"
+              src={user?.image || 'https://picsum.photos/100'}
+              alt="Rounded avatar"
+            />
           )}
           <span className="pl-1">{user?.username}</span>
         </Link>
