@@ -17,6 +17,7 @@
     "simple-import-sort" // Plugin for sorting imports in file.
   ],
   "rules": {
+    "import/named": "warn",
     "import/first": "warn",
     "import/newline-after-import": "warn",
     "import/no-duplicates": "error",
@@ -58,6 +59,9 @@
       "@typescript-eslint/parser": [".ts", ".tsx"] // use typescript-eslint parser for .ts|tsx files.
     },
     "import/resolver": {
+      "node": {
+        "extensions": ["ts", "js", "jsx", "tsx"]
+      },
       "typescript": {
         "project": "./tsconfig.eslint.json",
         "alwaysTryTypes": true // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`.
