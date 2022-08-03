@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useCallback } from 'react'
+import { useStore } from 'effector-react'
+import { useCallback, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -7,22 +8,24 @@ import { toast } from 'react-toastify'
 import { authService } from '@/app'
 import { routes } from '@/app/routing/routes'
 import { userService } from '@/app/services/user'
+import { $profileInfo, getProfileInfoFx } from '@/pages/settings/model'
 import { settingsFormSchema } from '@/pages/settings/ui/settings-form/schema/settings-form.schema'
 import { SettingsFormFields } from '@/pages/settings/ui/settings-form/settings-form.types'
 import { CircleIcon } from '@/shared/ui'
 import { FormInput, FormTextarea } from '@/shared/ui/molecules'
 
 export const SettingsForm = () => {
+  const profileInfo = useStore($profileInfo)
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid, isDirty, isSubmitting },
   } = useForm<SettingsFormFields>({
     mode: 'onChange',
     resolver: yupResolver(settingsFormSchema),
   })
   const navigate = useNavigate()
-  const userData = JSON.parse(String(localStorage.getItem('user')))
   const onSubmit: SubmitHandler<SettingsFormFields> = useCallback(
     async (data) => {
       try {
@@ -38,6 +41,18 @@ export const SettingsForm = () => {
     },
     [navigate],
   )
+
+  useEffect(() => {
+    getProfileInfoFx()
+  }, [])
+
+  useEffect(() => {
+    if (profileInfo?.user) {
+      Object.entries(profileInfo?.user).map(([key, value]: [any, any]) =>
+        setValue(key, value),
+      )
+    }
+  }, [profileInfo?.user, setValue])
 
   const handleLogout = useCallback(() => {
     authService.logout()
@@ -67,7 +82,6 @@ export const SettingsForm = () => {
           className="mb-2"
           register={register}
           errors={errors}
-          defaultValue={userData.image}
         />
 
         <FormInput<SettingsFormFields>
@@ -80,7 +94,6 @@ export const SettingsForm = () => {
           rules={{ required: 'This field is required.' }}
           register={register}
           errors={errors}
-          defaultValue={userData.username}
         />
 
         <FormTextarea<SettingsFormFields>
@@ -91,7 +104,6 @@ export const SettingsForm = () => {
           className="mb-2"
           register={register}
           errors={errors}
-          defaultValue={userData.bio}
         />
 
         <FormInput<SettingsFormFields>
@@ -103,7 +115,6 @@ export const SettingsForm = () => {
           className="mb-2"
           register={register}
           errors={errors}
-          defaultValue={userData.email}
         />
 
         <FormInput<SettingsFormFields>
@@ -111,7 +122,7 @@ export const SettingsForm = () => {
           type="text"
           name="password"
           label="Password"
-          placeholder="Password"
+          placeholder="New Password"
           className="mb-2"
           register={register}
           errors={errors}
