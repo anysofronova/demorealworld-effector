@@ -8,11 +8,7 @@ import { toast } from 'react-toastify'
 import { authService } from '@/app'
 import { routes } from '@/app/routing/routes'
 import { userService } from '@/app/services/user'
-import {
-  $profileInfo,
-  $profileProcessing,
-  getProfileInfoFx,
-} from '@/pages/settings/model'
+import { $profileInfo, getProfileInfoFx } from '@/pages/settings/model'
 import { settingsFormSchema } from '@/pages/settings/ui/settings-form/schema/settings-form.schema'
 import {
   SettingData,
@@ -52,7 +48,7 @@ export const SettingsForm = () => {
   useEffect(() => {
     getProfileInfoFx()
   }, [])
-
+  const loading = useStore(getProfileInfoFx.pending)
   useEffect(() => {
     if (profileInfo?.user) {
       Object.entries(profileInfo.user).map(([key, value]) =>
@@ -65,14 +61,13 @@ export const SettingsForm = () => {
     authService.logout()
     navigate(routes.HOME_PAGE)
   }, [navigate])
-  console.log($profileProcessing)
   return (
     <div
       className={
         'flex flex-col justify-center w-full justify-center pt-2 pb-1 px-4 max-w-[540px] mx-auto'
       }
     >
-      {$profileProcessing ? (
+      {loading ? (
         <Skeleton />
       ) : (
         <>
