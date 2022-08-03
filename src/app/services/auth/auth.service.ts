@@ -36,7 +36,7 @@ class AuthService {
 
   logout() {
     removeTokenFromStorage()
-    localStorage.removeItem('accessToken')
+    localStorage.removeItem('user')
   }
 }
 
