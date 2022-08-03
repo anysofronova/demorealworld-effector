@@ -21,7 +21,6 @@ export const SettingsForm = () => {
     mode: 'onChange',
     resolver: yupResolver(settingsFormSchema),
   })
-
   const navigate = useNavigate()
   const userData = JSON.parse(String(localStorage.getItem('user')))
   const onSubmit: SubmitHandler<SettingsFormFields> = useCallback(
