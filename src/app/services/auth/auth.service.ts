@@ -4,11 +4,11 @@ import {
   saveToStorage,
 } from '@/app/services/auth/auth.helper'
 import { axiosClassic } from '@/shared/http'
-import { IAuthResponse } from '@/shared/interfaces/user.interface'
+import { IUserResponse } from '@/shared/interfaces'
 
 class AuthService {
   async login(email: string, password: string) {
-    const response = await axiosClassic.post<IAuthResponse>(ApiResponse.LOGIN, {
+    const response = await axiosClassic.post<IUserResponse>(ApiResponse.LOGIN, {
       user: { email, password },
     })
 
@@ -20,7 +20,7 @@ class AuthService {
   }
 
   async register(username: string, email: string, password: string) {
-    const response = await axiosClassic.post<IAuthResponse>(
+    const response = await axiosClassic.post<IUserResponse>(
       ApiResponse.REGISTER,
       {
         user: { username, email, password },
@@ -40,4 +40,4 @@ class AuthService {
   }
 }
 
-export default new AuthService()
+export const authService = new AuthService()

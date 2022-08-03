@@ -3,14 +3,9 @@ export interface IUser {
   username: string
   bio: string | null
   image: string | null
-  token: string
+  token?: string
 }
 
-export interface IAuthResponse {
+export interface IUserResponse {
   user: IUser
-}
-
-type DataResult<T> = {
-  success: boolean
-  errors?: { [P in keyof T]?: string[] }
 }

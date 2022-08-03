@@ -8,7 +8,7 @@ import {
 } from 'react'
 import { useLocation } from 'react-use'
 
-import AuthService from '@/app/services/auth/auth.service'
+import { authService } from '@/app/services/auth'
 
 import { IContext, UserState } from './auth.interface'
 
@@ -32,7 +32,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     const accessToken = Cookies.get('accessToken')
 
     if (!accessToken && !user) {
-      AuthService.logout()
+      authService.logout()
       setUser(null)
     }
   }, [pathname, user])

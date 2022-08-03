@@ -1,12 +1,12 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 
-import { API_ROOT } from '@/app/config/constants'
 import { routes } from '@/app/routing/routes'
 
 import * as types from './types'
 
-export const API_URL = API_ROOT ?? 'https://api.realworld.io/api-docs/'
+export const API_URL = 'https://api.realworld.io'
 
 export const getContentType = () => ({
   'Content-Type': 'application/json;charset=UTF-8',
@@ -38,6 +38,12 @@ export const setToken = (token: string): void => {
   instance.defaults.headers.common.Authorization = `Token ${token}`
 }
 
+const token = Cookies.get('accessToken')
+
+const config = {
+  headers: { Authorization: `Bearer ${token}` },
+}
+
 export const request = <T = void>(
   options: types.HttpRequestOptions,
 ): Promise<T> => {
@@ -45,6 +51,7 @@ export const request = <T = void>(
     .request({
       url: options.url,
       method: options.method,
+      headers: { ...config.headers },
       data: options?.data,
     })
     .then((response) => response.data)

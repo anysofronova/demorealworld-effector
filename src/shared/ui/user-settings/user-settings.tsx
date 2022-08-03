@@ -6,17 +6,17 @@ import { IUser } from '@/shared/interfaces/user.interface'
 
 type UserSettingsProps = {
   user: IUser | null
-  setMode: (mode: boolean) => void
+  disableMode: () => void
 }
 
-export const UserSettings = ({ user, setMode }: UserSettingsProps) => {
+export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
   return (
     <div className="flex flex-col gap-3 md:items-center w-full md:justify-between md:flex-row">
       <div className="flex self-start">
         <Link
-          to={routes.HOME}
-          onClick={() => setMode(false)}
+          to={routes.HOME_PAGE}
           className="text-base font-medium text-gray-500 hover:text-gray-900"
+          onClick={disableMode}
         >
           Home
         </Link>
@@ -24,24 +24,24 @@ export const UserSettings = ({ user, setMode }: UserSettingsProps) => {
       <div className="flex flex-col gap-3 md:flex-row ">
         <Link
           to={routes.EDITOR_PAGE}
-          onClick={() => setMode(false)}
           className="text-base font-medium text-gray-500 hover:text-gray-900 flex items-center md:ml-3"
+          onClick={disableMode}
         >
           <AiOutlineEdit className="mr-2 ml-1" />
           New article
         </Link>
         <Link
-          to={routes.SETTINGS}
-          onClick={() => setMode(false)}
+          to={routes.SETTINGS_PAGE}
           className="text-base font-medium text-gray-500 hover:text-gray-900 flex items-center md:ml-3"
+          onClick={disableMode}
         >
           <IoSettingsOutline className="mr-2" />
           Settings
         </Link>
         <Link
           to={`/${user?.username}`}
-          onClick={() => setMode(false)}
           className="text-base font-medium text-gray-500 hover:text-gray-900 flex items-center md:ml-3"
+          onClick={disableMode}
         >
           {user?.username}
         </Link>

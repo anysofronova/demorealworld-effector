@@ -1,11 +1,11 @@
 import { FC, useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useLocation } from 'react-router'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useLocation } from 'react-use'
 
+import { authService } from '@/app'
 import { routes } from '@/app/routing/routes'
-import AuthService from '@/app/services/auth/auth.service'
 import { useAuth } from '@/shared/hooks/useAuth'
 import { CircleIcon } from '@/shared/ui'
 import { FormInput } from '@/shared/ui/molecules'
@@ -19,25 +19,25 @@ export const AuthForm: FC<IForm> = ({ title, subTitle }) => {
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
   } = useForm<AuthFormFields>()
-  const { pathname } = useLocation()
-  const { user, setUser } = useAuth()
-  const isSignUp = pathname === '/register'
+  const location = useLocation()
+  const { setUser } = useAuth()
+  const isSignUp = location?.pathname === '/register'
   const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<AuthFormFields> = useCallback(
     async (data) => {
       try {
         const response = isSignUp
-          ? await AuthService.register(
+          ? await authService.register(
               String(data.username),
               data.email,
               data.password,
             )
-          : await AuthService.login(data.email, data.password)
+          : await authService.login(data.email, data.password)
         if (response.user) {
           setUser(response.user)
           toast.success('Successful authorization!')
-          navigate(routes.HOME)
+          navigate(routes.HOME_PAGE)
         }
       } catch (error: any) {
         const [errorMessage] = Object.values(error.response.data.errors)

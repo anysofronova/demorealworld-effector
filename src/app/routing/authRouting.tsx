@@ -4,15 +4,15 @@ import { routes } from '@/app/routing/routes'
 import { Suspensy } from '@/shared/ui/suspensy'
 import { namedLazy } from '@/shared/utils/namedLazy'
 
-const SignIn = namedLazy(() => import('@/pages/signIn'), 'SignIn')
-const SignUp = namedLazy(() => import('@/pages/signUp'), 'SignUp')
+const SignInPage = namedLazy(() => import('@/pages'), 'SignInPage')
+const SignUpPage = namedLazy(() => import('@/pages'), 'SignUpPage')
 
 export const authRouting: RouteObject[] = [
   {
     path: routes.LOGIN,
     element: (
       <Suspensy>
-        <SignIn />
+        <SignInPage />
       </Suspensy>
     ),
   },
@@ -20,7 +20,7 @@ export const authRouting: RouteObject[] = [
     path: routes.REGISTER,
     element: (
       <Suspensy>
-        <SignUp />
+        <SignUpPage />
       </Suspensy>
     ),
   },

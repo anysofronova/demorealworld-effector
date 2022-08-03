@@ -1,2 +1,4 @@
-export * as article from './article'
-export * as auth from './auth'
+export * from './article'
+export * from './auth'
+export * from './profile'
+export * from './tag'
