@@ -7,7 +7,7 @@ class UserService {
     return await request<IUserResponse>({
       url: '/api/user',
       method: 'put',
-      data,
+      data: { user: data },
     })
   }
   async getUserProfile() {
