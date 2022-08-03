@@ -10,7 +10,10 @@ import { routes } from '@/app/routing/routes'
 import { userService } from '@/app/services/user'
 import { $profileInfo, getProfileInfoFx } from '@/pages/settings/model'
 import { settingsFormSchema } from '@/pages/settings/ui/settings-form/schema/settings-form.schema'
-import { SettingsFormFields } from '@/pages/settings/ui/settings-form/settings-form.types'
+import {
+  SettingsFormFields,
+  SettingData,
+} from '@/pages/settings/ui/settings-form/settings-form.types'
 import { CircleIcon } from '@/shared/ui'
 import { FormInput, FormTextarea } from '@/shared/ui/molecules'
 
@@ -48,7 +51,7 @@ export const SettingsForm = () => {
 
   useEffect(() => {
     if (profileInfo?.user) {
-      Object.entries(profileInfo?.user).map(([key, value]: [any, any]) =>
+      Object.entries(profileInfo.user).map(([key, value]: SettingData) =>
         setValue(key, value),
       )
     }
