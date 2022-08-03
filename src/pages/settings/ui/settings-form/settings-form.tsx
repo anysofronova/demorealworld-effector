@@ -23,7 +23,7 @@ export const SettingsForm = () => {
   })
 
   const navigate = useNavigate()
-
+  const userData = JSON.parse(String(localStorage.getItem('user')))
   const onSubmit: SubmitHandler<SettingsFormFields> = useCallback(
     async (data) => {
       try {
@@ -68,6 +68,7 @@ export const SettingsForm = () => {
           className="mb-2"
           register={register}
           errors={errors}
+          defaultValue={userData.image}
         />
 
         <FormInput<SettingsFormFields>
@@ -80,6 +81,7 @@ export const SettingsForm = () => {
           rules={{ required: 'This field is required.' }}
           register={register}
           errors={errors}
+          defaultValue={userData.username}
         />
 
         <FormTextarea<SettingsFormFields>
@@ -90,6 +92,7 @@ export const SettingsForm = () => {
           className="mb-2"
           register={register}
           errors={errors}
+          defaultValue={userData.bio}
         />
 
         <FormInput<SettingsFormFields>
@@ -101,6 +104,7 @@ export const SettingsForm = () => {
           className="mb-2"
           register={register}
           errors={errors}
+          defaultValue={userData.email}
         />
 
         <FormInput<SettingsFormFields>
