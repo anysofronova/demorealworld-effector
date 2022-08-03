@@ -7,6 +7,7 @@ import { namedLazy } from '@/shared/utils/namedLazy'
 
 const HomePage = namedLazy(() => import('@/pages'), 'HomePage')
 const SettingsPage = namedLazy(() => import('@/pages'), 'SettingsPage')
+const EditorPage = namedLazy(() => import('@/pages'), 'EditorPage')
 const ProfilePage = namedLazy(() => import('@/pages'), 'ProfilePage')
 
 export const homeRouting: RouteObject[] = [
@@ -27,6 +28,16 @@ export const homeRouting: RouteObject[] = [
       <Suspensy>
         <PrivateRoute>
           <SettingsPage />
+        </PrivateRoute>
+      </Suspensy>
+    ),
+  },
+  {
+    path: routes.EDITOR_PAGE,
+    element: (
+      <Suspensy>
+        <PrivateRoute>
+          <EditorPage />
         </PrivateRoute>
       </Suspensy>
     ),

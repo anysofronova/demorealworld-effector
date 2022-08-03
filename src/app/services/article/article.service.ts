@@ -1,13 +1,14 @@
 import { request } from '@/shared/http'
+import { ArticleFormFields } from '@/pages/editor/ui/article-form/article-form.types'
 import {
-  CreateArticleResponse,
   IArticle,
   IArticleResponse,
   UpdateArticleResponse,
 } from '@/shared/interfaces'
+import { axiosClassic } from '@/shared/http'
 
 class ArticleService {
-  async createArticle(data: CreateArticleResponse) {
+  async createArticle(data: ArticleFormFields) {
     return await request<IArticle>({
       url: `/api/articles`,
       method: 'post',
