@@ -12,7 +12,7 @@ class ArticleService {
     return await request<IArticle>({
       url: `/api/articles`,
       method: 'post',
-      data,
+      data: { article: data },
     })
   }
   async updateArticle(data: UpdateArticleResponse) {
