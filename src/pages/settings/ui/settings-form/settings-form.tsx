@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { authService } from '@/app'
+import { authService, profileService } from '@/app'
 import { routes } from '@/app/routing/routes'
 import { userService } from '@/app/services/user'
 import { getProfileInfoFx } from '@/pages/settings/model'
@@ -34,7 +34,18 @@ export const SettingsForm = () => {
     async (data) => {
       try {
         const res = await userService.updateUserProfile(data)
-        if (res) {
+        if (res.user) {
+          await profileService
+            .getProfileByUsername(res.user.username)
+            .then((data: any) => {
+              const newData = {
+                ...data.profile,
+                token: res.user.token,
+                email: res.user.email,
+              }
+              delete newData.following
+              setUser(newData)
+            })
           toast.success('Profile updated successfully!')
           navigate(routes.HOME_PAGE)
         }

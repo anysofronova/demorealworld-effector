@@ -45,7 +45,7 @@ export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
         >
           {user?.image && (
             <img
-              className="w-10 h-10 rounded-full mr-2"
+              className="w-10 h-10 rounded-full mr-2 object-cover"
               loading="lazy"
               src={user?.image || 'https://picsum.photos/100'}
               alt="Rounded avatar"

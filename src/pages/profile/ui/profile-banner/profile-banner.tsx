@@ -11,7 +11,7 @@ export const ProfileBanner = () => {
         <div className="w-24 h-24">
           <img
             className="w-full h-full rounded-full object-cover"
-            src="https://sun9-87.userapi.com/impf/rTI4cRsstPJf6RB7dVTih3c2hNDkuRDaKheFOw/AsaOb854HSY.jpg?size=2000x1333&quality=96&sign=931e9e2c7b1c1a56f19b3264fdacc6a5&type=album"
+            src={user?.image || 'https://picsum.photos/100'}
             alt="Profile"
           />
         </div>
