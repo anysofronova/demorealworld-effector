@@ -1,1 +1,1 @@
-import * from './article-header'
+export * from './article-header'

@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useEvent } from 'effector-react'
 import { useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -6,10 +7,11 @@ import { toast } from 'react-toastify'
 
 import { articleService } from '@/app'
 import { routes } from '@/app/routing/routes'
+import { createFormSubmitted } from '@/entities/article/model/events'
+import { ArticleFormFields } from '@/pages/editor/ui/article-form/article-form.types'
 import { articleFormSchema } from '@/pages/editor/ui/article-form/schema/article-form.schema'
 import { CircleIcon } from '@/shared/ui'
 import { FormInput, FormTextarea } from '@/shared/ui/molecules'
-import { ArticleFormFields } from '@/pages/editor/ui/article-form/article-form.types'
 
 export const ArticleForm = () => {
   const {
@@ -20,6 +22,7 @@ export const ArticleForm = () => {
     mode: 'onChange',
     resolver: yupResolver(articleFormSchema),
   })
+  const submitCreateForm = useEvent(createFormSubmitted)
   const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<ArticleFormFields> = useCallback(
@@ -27,6 +30,7 @@ export const ArticleForm = () => {
       try {
         const res = await articleService.createArticle(data)
         if (res) {
+          submitCreateForm()
           toast.success('Article added successfully!')
           navigate(routes.HOME_PAGE)
         }
@@ -35,7 +39,7 @@ export const ArticleForm = () => {
         toast.error(errorMessage ? String(errorMessage) : 'Error')
       }
     },
-    [navigate],
+    [navigate, submitCreateForm],
   )
 
   return (

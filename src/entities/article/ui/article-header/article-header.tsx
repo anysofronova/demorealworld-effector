@@ -1,13 +1,19 @@
-export const ArticleHeader = () => {
+import { AiTwotoneHeart } from 'react-icons/all'
+
+type Props = Readonly<{
+  createdAt: Date
+  favoritesCount: number
+}>
+
+export const ArticleHeader = ({ createdAt, favoritesCount }: Props) => {
   return (
     <div className="flex justify-between items-center">
-      <span className="font-light text-gray-600">mar 10, 2019</span>
-      <a
-        className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
-        href="#"
-      >
-        Design
-      </a>
+      <span className="font-light text-gray-600">
+        <p>{new Date(createdAt).toDateString()}</p>
+      </span>
+      <button className="flex items-center bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        <AiTwotoneHeart className="mr-2" /> {favoritesCount}
+      </button>
     </div>
   )
 }

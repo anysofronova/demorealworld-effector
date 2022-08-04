@@ -1,1 +1,1 @@
-import * from './article-footer'
+export * from './article-footer'

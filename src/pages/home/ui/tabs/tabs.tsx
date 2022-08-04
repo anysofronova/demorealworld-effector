@@ -1,11 +1,31 @@
 import { Tab } from '@headlessui/react'
-import { SingleArticle } from '@/entities/article/ui/single-article/single-article'
+import { useList, useStore } from 'effector-react'
+import { memo, useEffect } from 'react'
 
-type TabsProps = {
-  isLoggedIn: boolean
-}
+import {
+  $articles,
+  getArticlesFx,
+  isPending,
+  SingleArticle,
+} from '@/entities/article'
+import { useAuth } from '@/shared/hooks/useAuth'
+import { IArticle } from '@/shared/interfaces'
+import { ArticleListSkeleton } from '@/shared/ui'
 
-export const Tabs = ({ isLoggedIn }: TabsProps) => {
+export const Tabs = memo(() => {
+  const articles = useStore($articles)
+  const { user } = useAuth()
+  const isLoggedIn = Boolean(user)
+  const articlesList = useList<IArticle>($articles, {
+    keys: [articles],
+    fn: (article, index) => <SingleArticle key={article.slug} index={index} />,
+  })
+  const isLoading = useStore(isPending)
+
+  useEffect(() => {
+    getArticlesFx()
+  }, [])
+
   return (
     <div className="sm:container sm:mx-auto mt-4 px-2">
       <Tab.Group>
@@ -33,13 +53,15 @@ export const Tabs = ({ isLoggedIn }: TabsProps) => {
         </Tab.List>
         <Tab.Panels>
           {isLoggedIn && <Tab.Panel>Content 1</Tab.Panel>}
-          <Tab.Panel>
-            <SingleArticle />
-          </Tab.Panel>
+          {isLoading ? (
+            <ArticleListSkeleton />
+          ) : (
+            <Tab.Panel>{articlesList}</Tab.Panel>
+          )}
         </Tab.Panels>
       </Tab.Group>
     </div>
   )
-}
+})
 
-export default Tabs
+Tabs.displayName = 'Tabs'

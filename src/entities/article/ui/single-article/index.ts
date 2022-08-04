@@ -1,1 +1,1 @@
-import * from './single-article'
+export * from './single-article'
