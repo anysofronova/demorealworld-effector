@@ -12,7 +12,7 @@ import { OpenMenu } from '@/shared/ui/header/ui/open-menu/open-menu'
 export const Header = () => {
   const [mode, setMode] = useState<boolean>(false)
   const { user } = useAuth()
-  const isLoggedIn = Boolean(localStorage.getItem('user'))
+  const isLoggedIn = Boolean(user)
 
   const disableMode = useCallback(() => {
     setMode(false)

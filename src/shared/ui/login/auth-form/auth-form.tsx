@@ -4,7 +4,7 @@ import { useLocation } from 'react-router'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { authService } from '@/app'
+import { authService, profileService } from '@/app'
 import { routes } from '@/app/routing/routes'
 import { useAuth } from '@/shared/hooks/useAuth'
 import { CircleIcon } from '@/shared/ui'
@@ -35,9 +35,19 @@ export const AuthForm: FC<IForm> = ({ title, subTitle }) => {
             )
           : await authService.login(data.email, data.password)
         if (response.user) {
-          setUser(response.user)
-          toast.success('Successful authorization!')
-          navigate(routes.HOME_PAGE)
+          await profileService
+            .getProfileByUsername(response.user.username)
+            .then((data: any) => {
+              const user = {
+                ...data.profile,
+                token: response.user.token,
+                email: response.user.email,
+              }
+              delete user.following
+              setUser(user)
+              toast.success('Successful authorization!')
+              navigate(routes.HOME_PAGE)
+            })
         }
       } catch (error: any) {
         const [errorMessage] = Object.values(error.response.data.errors)

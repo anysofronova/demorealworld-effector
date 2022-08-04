@@ -11,8 +11,8 @@ type UserSettingsProps = {
 
 export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
   return (
-    <div className="flex flex-col gap-3 md:items-center w-full md:justify-between md:flex-row">
-      <div className="flex self-start">
+    <div className="flex flex-col  gap-3 md:items-center w-full md:justify-between md:flex-row">
+      <div className="flex self-start sm:self-center">
         <Link
           to={routes.HOME_PAGE}
           className="text-base font-medium text-gray-500 hover:text-gray-900"
@@ -21,7 +21,7 @@ export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
           Home
         </Link>
       </div>
-      <div className="flex flex-col gap-3 md:flex-row ">
+      <div className="flex flex-col gap-3 md:flex-row">
         <Link
           to={routes.EDITOR_PAGE}
           className="text-base font-medium text-gray-500 hover:text-gray-900 flex items-center md:ml-3"

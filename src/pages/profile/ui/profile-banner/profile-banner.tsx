@@ -7,7 +7,7 @@ export const ProfileBanner = () => {
   const { user } = useAuth()
   return (
     <div className="flex relative inset-x-0 w-full bg-gray-200 text-white justify-center items-center shadow-inner">
-      <div className="max-w-[700px] w-5/6 flex flex-col justify-center items-center p-8 gap-2">
+      <div className="max-w-[700px] sm:w-5/6 flex flex-col justify-center items-center p-8 gap-2">
         <div className="w-24 h-24">
           <img
             className="w-full h-full rounded-full object-cover"

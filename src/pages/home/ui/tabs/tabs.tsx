@@ -6,7 +6,7 @@ type TabsProps = {
 
 export const Tabs = ({ isLoggedIn }: TabsProps) => {
   return (
-    <div className="sm:container sm:mx-auto mt-4">
+    <div className="sm:container sm:mx-auto mt-4 px-2">
       <Tab.Group>
         <Tab.List className="border-b border-neutral-500">
           {isLoggedIn && (

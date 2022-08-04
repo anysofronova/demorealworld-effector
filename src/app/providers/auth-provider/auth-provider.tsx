@@ -23,7 +23,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     const accessToken = Cookies.get('accessToken')
 
     if (accessToken) {
-      const user = JSON.parse(localStorage.getItem('user') || '')
+      const user = JSON.parse(localStorage.getItem('profile') || '')
       setUser(user)
     }
   }, [])

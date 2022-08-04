@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { authService } from '@/app'
 import { routes } from '@/app/routing/routes'
 import { userService } from '@/app/services/user'
-import { $profileInfo, getProfileInfoFx } from '@/pages/settings/model'
+import { getProfileInfoFx } from '@/pages/settings/model'
 import { settingsFormSchema } from '@/pages/settings/ui/settings-form/schema/settings-form.schema'
 import {
   SettingData,
@@ -16,9 +16,9 @@ import {
 } from '@/pages/settings/ui/settings-form/settings-form.types'
 import { CircleIcon, Skeleton } from '@/shared/ui'
 import { FormInput, FormTextarea } from '@/shared/ui/molecules'
+import { useAuth } from '@/shared/hooks/useAuth'
 
 export const SettingsForm = () => {
-  const profileInfo = useStore($profileInfo)
   const {
     register,
     handleSubmit,
@@ -51,16 +51,18 @@ export const SettingsForm = () => {
   }, [])
 
   const loading = useStore(getProfileInfoFx.pending)
+  const { user, setUser } = useAuth()
   useEffect(() => {
-    if (profileInfo?.user) {
-      Object.entries(profileInfo.user).map(([key, value]) =>
+    if (user) {
+      Object.entries(user).map(([key, value]) =>
         setValue(key as SettingData, value),
       )
     }
-  }, [profileInfo?.user, setValue])
+  }, [user, setValue])
 
   const handleLogout = useCallback(() => {
     authService.logout()
+    setUser(null)
     navigate(routes.HOME_PAGE)
   }, [navigate])
   return (

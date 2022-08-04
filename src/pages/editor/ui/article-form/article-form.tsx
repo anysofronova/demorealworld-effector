@@ -24,7 +24,6 @@ export const ArticleForm = () => {
 
   const onSubmit: SubmitHandler<ArticleFormFields> = useCallback(
     async (data) => {
-      console.log(data)
       try {
         const res = await articleService.createArticle(data)
         if (res) {

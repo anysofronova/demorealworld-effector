@@ -8,7 +8,7 @@ interface PropType {
 }
 
 export const PrivateRoute: FC<PropType> = ({ children }) => {
-  const user = localStorage.getItem('user')
+  const user = localStorage.getItem('profile')
 
   return !user ? <Navigate to={routes.LOGIN} /> : children
 }

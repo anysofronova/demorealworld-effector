@@ -1,10 +1,12 @@
 import { useTitle } from 'react-use'
 import { Banner } from '@/pages/home/ui/banner'
 import { Tabs } from '@/pages/home/ui/tabs'
+import { useAuth } from '@/shared/hooks/useAuth'
 
 export const HomePage = () => {
   useTitle('Home — Conduit')
-  const isLoggedIn = Boolean(localStorage.getItem('user'))
+  const { user } = useAuth()
+  const isLoggedIn = Boolean(user)
   return (
     <div>
       <Banner />
