@@ -46,12 +46,14 @@ instance.interceptors.response.use(
 
 export const request = <T = void>(
   options: types.HttpRequestOptions,
+  params?: types.AnyObject,
 ): Promise<T> => {
   return instance
     .request({
       url: options.url,
       method: options.method,
       data: options?.data,
+      params,
     })
     .then((response) => response.data)
     .catch((error) => {

@@ -1,4 +1,5 @@
 import { Tab } from '@headlessui/react'
+import { SingleArticle } from '@/entities/article/ui/single-article/single-article'
 
 type TabsProps = {
   isLoggedIn: boolean
@@ -32,7 +33,9 @@ export const Tabs = ({ isLoggedIn }: TabsProps) => {
         </Tab.List>
         <Tab.Panels>
           {isLoggedIn && <Tab.Panel>Content 1</Tab.Panel>}
-          <Tab.Panel>Content 2</Tab.Panel>
+          <Tab.Panel>
+            <SingleArticle />
+          </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </div>

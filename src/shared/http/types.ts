@@ -7,3 +7,13 @@ export interface HttpRequestOptions extends Omit<RequestInit, 'body'> {
   data?: any
   responseType?: ResponseType
 }
+
+export interface HttpRequestParams {
+  tag: string
+  author: string
+  favorited: string
+  limit: number
+  offset: number
+}
+
+export type AnyObject = Record<string, any>
