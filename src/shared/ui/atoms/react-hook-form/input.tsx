@@ -49,6 +49,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {...props}
         ref={ref}
         id={id}
+        autoComplete="off"
         name={name}
         type={type}
         aria-label={label}

@@ -14,9 +14,9 @@ import {
   SettingData,
   SettingsFormFields,
 } from '@/pages/settings/ui/settings-form/settings-form.types'
+import { useAuth } from '@/shared/hooks/useAuth'
 import { CircleIcon, Skeleton } from '@/shared/ui'
 import { FormInput, FormTextarea } from '@/shared/ui/molecules'
-import { useAuth } from '@/shared/hooks/useAuth'
 
 export const SettingsForm = () => {
   const {
@@ -75,7 +75,8 @@ export const SettingsForm = () => {
     authService.logout()
     setUser(null)
     navigate(routes.HOME_PAGE)
-  }, [navigate])
+  }, [navigate, setUser])
+
   return (
     <div
       className={

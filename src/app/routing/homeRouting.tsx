@@ -1,6 +1,5 @@
 import { RouteObject } from 'react-router-dom'
 
-import { PrivateRoute } from '@/app/routing/private-route'
 import { routes } from '@/app/routing/routes'
 import { Suspensy } from '@/shared/ui/suspensy'
 import { namedLazy } from '@/shared/utils/namedLazy'
@@ -16,9 +15,7 @@ export const homeRouting: RouteObject[] = [
     index: true,
     element: (
       <Suspensy>
-        <PrivateRoute>
-          <HomePage />
-        </PrivateRoute>
+        <HomePage />
       </Suspensy>
     ),
   },
@@ -26,9 +23,7 @@ export const homeRouting: RouteObject[] = [
     path: routes.SETTINGS_PAGE,
     element: (
       <Suspensy>
-        <PrivateRoute>
-          <SettingsPage />
-        </PrivateRoute>
+        <SettingsPage />
       </Suspensy>
     ),
   },
@@ -36,9 +31,7 @@ export const homeRouting: RouteObject[] = [
     path: routes.EDITOR_PAGE,
     element: (
       <Suspensy>
-        <PrivateRoute>
-          <EditorPage />
-        </PrivateRoute>
+        <EditorPage />
       </Suspensy>
     ),
   },
@@ -46,9 +39,7 @@ export const homeRouting: RouteObject[] = [
     path: routes.PROFILE_PAGE,
     element: (
       <Suspensy>
-        <PrivateRoute>
-          <ProfilePage />
-        </PrivateRoute>
+        <ProfilePage />
       </Suspensy>
     ),
   },

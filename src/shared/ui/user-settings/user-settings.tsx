@@ -1,6 +1,8 @@
+import { SyntheticEvent } from 'react'
 import { AiOutlineEdit, IoSettingsOutline } from 'react-icons/all'
 import { Link } from 'react-router-dom'
 
+import { defaultImageUrl } from '@/app/config'
 import { routes } from '@/app/routing/routes'
 import { IUser } from '@/shared/interfaces/user.interface'
 
@@ -47,8 +49,12 @@ export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
             <img
               className="w-10 h-10 rounded-full mr-2 object-cover"
               loading="lazy"
-              src={user?.image || 'https://picsum.photos/100'}
+              src={user?.image}
               alt="Rounded avatar"
+              onError={(event: SyntheticEvent<HTMLImageElement, Event>) => {
+                event.currentTarget.src = defaultImageUrl
+                event.currentTarget.onerror = null
+              }}
             />
           )}
           <span className="pl-1">{user?.username}</span>
