@@ -17,6 +17,7 @@ import {
 import { useAuth } from '@/shared/hooks/useAuth'
 import { CircleIcon, Skeleton } from '@/shared/ui'
 import { FormInput, FormTextarea } from '@/shared/ui/molecules'
+import { makeErrors } from '@/shared/utils/makeErrors'
 
 export const SettingsForm = () => {
   const {
@@ -50,8 +51,8 @@ export const SettingsForm = () => {
           navigate(routes.HOME_PAGE)
         }
       } catch (error: any) {
-        const [errorMessage] = Object.values(error.response.data.errors)
-        toast.error(errorMessage ? String(errorMessage) : 'Error')
+        console.log('error', error)
+        makeErrors(error.response?.data?.errors)
       }
     },
     [navigate],
