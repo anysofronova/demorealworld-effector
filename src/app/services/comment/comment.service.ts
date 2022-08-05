@@ -16,6 +16,12 @@ class CommentService {
       method: 'get',
     })
   }
+  async deleteCommentById({ slug, id }: { slug: string; id: number }) {
+    return await request<IComment>({
+      url: `/api/articles/${slug}/comments/${id}`,
+      method: 'delete',
+    })
+  }
 }
 
 export const commentService = new CommentService()

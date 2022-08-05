@@ -1,7 +1,7 @@
 import { CommentForm } from '@/entities/comment/ui/comment-form'
 import { useList, useStore } from 'effector-react'
 import { IComment } from '@/shared/interfaces'
-import { $comments, getCommentsBySlugFx, isPending } from '@/entities/comment'
+import { $comments, getCommentsBySlugFx } from '@/entities/comment'
 import { useEffect } from 'react'
 import { SingleComment } from '@/entities/comment/ui/single-comment'
 
@@ -18,10 +18,11 @@ export const ArticleComments = ({ slug }: ArticleCommentsProps) => {
         createdAt={comment.createdAt}
         body={comment.body}
         author={comment.author}
+        slug={slug}
+        id={comment.id}
       />
     ),
   })
-  const isLoading = useStore(isPending)
 
   useEffect(() => {
     getCommentsBySlugFx(slug)

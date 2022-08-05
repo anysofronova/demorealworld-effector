@@ -25,6 +25,7 @@ export const CommentForm = ({ slug }: CommentFormProps) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid, isDirty, isSubmitting },
   } = useForm<CommentFormFields>({
     mode: 'onChange',
@@ -36,6 +37,7 @@ export const CommentForm = ({ slug }: CommentFormProps) => {
       try {
         const res = await commentService.addComment(data, slug)
         if (res) {
+          reset()
           submitAddComment()
           toast.success('Comment added successfully!')
         }

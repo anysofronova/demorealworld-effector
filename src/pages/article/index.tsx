@@ -16,7 +16,6 @@ import { ArticlePageSkeleton } from '@/shared/ui/atoms/article-page-skeleton'
 
 export const ArticlePage = () => {
   const { slug } = useParams()
-  console.log(slug)
   useEffect(() => {
     if (slug) getArticleBySlugFx(slug)
   }, [])
