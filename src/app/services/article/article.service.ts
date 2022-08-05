@@ -1,17 +1,17 @@
+import { ArticleFormFields } from '@/pages/editor/ui/article-form/article-form.types'
 import { request } from '@/shared/http'
 import {
-  CreateArticleResponse,
   IArticle,
   IArticleResponse,
   UpdateArticleResponse,
 } from '@/shared/interfaces'
 
 class ArticleService {
-  async createArticle(data: CreateArticleResponse) {
+  async createArticle(data: ArticleFormFields) {
     return await request<IArticle>({
       url: `/api/articles`,
       method: 'post',
-      data,
+      data: { article: data },
     })
   }
   async updateArticle(data: UpdateArticleResponse) {

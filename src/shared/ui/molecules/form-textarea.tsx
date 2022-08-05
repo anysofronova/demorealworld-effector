@@ -43,6 +43,7 @@ export const FormTextarea = <TFormValues extends Record<string, any>>({
     <div className={clsx('w-full', className)}>
       <textarea
         id={id}
+        autoComplete="off"
         name={name}
         aria-label={label}
         aria-invalid={Boolean(errors && errorMessages)}

@@ -1,4 +1,4 @@
-import { ApiResponse } from '@/app/config/enums/urls'
+import { ApiResponse } from '@/app/config/enums'
 import {
   removeTokenFromStorage,
   saveToStorage,
@@ -36,7 +36,7 @@ class AuthService {
 
   logout() {
     removeTokenFromStorage()
-    localStorage.removeItem('accessToken')
+    localStorage.removeItem('profile')
   }
 }
 

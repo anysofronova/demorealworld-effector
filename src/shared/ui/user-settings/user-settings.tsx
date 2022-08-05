@@ -1,6 +1,8 @@
+import { SyntheticEvent } from 'react'
 import { AiOutlineEdit, IoSettingsOutline } from 'react-icons/all'
 import { Link } from 'react-router-dom'
 
+import { defaultImageUrl } from '@/app/config'
 import { routes } from '@/app/routing/routes'
 import { IUser } from '@/shared/interfaces/user.interface'
 
@@ -11,8 +13,8 @@ type UserSettingsProps = {
 
 export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
   return (
-    <div className="flex flex-col gap-3 md:items-center w-full md:justify-between md:flex-row">
-      <div className="flex self-start">
+    <div className="flex flex-col  gap-3 md:items-center w-full md:justify-between md:flex-row">
+      <div className="flex self-start sm:self-center">
         <Link
           to={routes.HOME_PAGE}
           className="text-base font-medium text-gray-500 hover:text-gray-900"
@@ -21,7 +23,7 @@ export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
           Home
         </Link>
       </div>
-      <div className="flex flex-col gap-3 md:flex-row ">
+      <div className="flex flex-col gap-3 md:flex-row">
         <Link
           to={routes.EDITOR_PAGE}
           className="text-base font-medium text-gray-500 hover:text-gray-900 flex items-center md:ml-3"
@@ -40,10 +42,22 @@ export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
         </Link>
         <Link
           to={`/${user?.username}`}
-          className="text-base font-medium text-gray-500 hover:text-gray-900 flex items-center md:ml-3"
+          className="text-base font-medium text-gray-500 hover:text-gray-900 flex items-center md:ml-1"
           onClick={disableMode}
         >
-          {user?.username}
+          {user?.image && (
+            <img
+              className="w-10 h-10 rounded-full mr-2 object-cover"
+              loading="lazy"
+              src={user?.image}
+              alt="Rounded avatar"
+              onError={(event: SyntheticEvent<HTMLImageElement, Event>) => {
+                event.currentTarget.src = defaultImageUrl
+                event.currentTarget.onerror = null
+              }}
+            />
+          )}
+          <span className="pl-1">{user?.username}</span>
         </Link>
       </div>
     </div>

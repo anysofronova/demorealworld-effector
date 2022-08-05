@@ -5,3 +5,5 @@ export type SettingsFormFields = {
   image: string
   password: string
 }
+
+export type SettingData = keyof SettingsFormFields
