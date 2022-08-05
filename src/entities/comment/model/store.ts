@@ -1,7 +1,6 @@
 import { restore, sample } from 'effector'
 import { addCommentSubmitted } from '@/entities/comment/model/events'
 import { getCommentsBySlugFx } from './effect'
-import { createFormSubmitted } from './events'
 
 export const $commentsWithCount = restore(getCommentsBySlugFx, null)
 

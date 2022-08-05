@@ -15,7 +15,7 @@ const commentFormSchema = object({
   body: string().required(),
 })
 
-type CommentFormFields = {
+export type CommentFormFields = {
   body: string
 }
 type CommentFormProps = {

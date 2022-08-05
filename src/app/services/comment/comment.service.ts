@@ -1,8 +1,9 @@
-import { IComment, ICommentResponse } from '@/shared/interfaces'
+import { IComment, ICommentsResponse } from '@/shared/interfaces'
 import { request } from '@/shared/http'
+import { CommentFormFields } from '@/entities/comment/ui/comment-form'
 
 class CommentService {
-  async addComment(data: ArticleFormFields, slug: string) {
+  async addComment(data: CommentFormFields, slug: string) {
     return await request<IComment>({
       url: `/api/articles/${slug}/comments`,
       method: 'post',
@@ -10,7 +11,7 @@ class CommentService {
     })
   }
   async getCommentsBySlug(slug: string) {
-    return await request<ICommentResponse>({
+    return await request<ICommentsResponse>({
       url: `/api/articles/${slug}/comments`,
       method: 'get',
     })

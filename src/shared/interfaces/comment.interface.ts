@@ -8,6 +8,6 @@ export interface IComment {
   updatedAt: Date
 }
 
-export interface ICommentResponse {
+export interface ICommentsResponse {
   comments: IComment[]
 }

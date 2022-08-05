@@ -11,7 +11,7 @@ type Props = {
 export const ArticleMeta = ({ author, createdAt, favoritesCount }: Props) => {
   return (
     <div className="flex w-full sm:container sm:px-8 px-8">
-      <div className="flex gap-5 sm:justify-start justify-between w-full">
+      <div className="flex gap-5 sm:justify-center justify-between w-full">
         <div className="flex flex-col sm:flex-row gap-2">
           <Link to={`/${author.username}`} className="flex items-center">
             <img
