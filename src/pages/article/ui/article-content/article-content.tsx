@@ -2,7 +2,7 @@ import { IArticle } from '@/shared/interfaces'
 
 export const ArticleContent = ({ body, tagList }: IArticle) => {
   return (
-    <div className="border-b border-gray-200 sm:container sm:mx-auto px-2 flex flex-col gap-6 py-6 max-w-[800px]">
+    <div className="sm:container border-b border-gray-200 sm:container sm:mx-auto px-8 flex flex-col gap-6 py-6 max-w-[800px]">
       <div className="font-light text-xl">{body}</div>
       <div className="flex gap-2">
         {tagList.map((i) => (

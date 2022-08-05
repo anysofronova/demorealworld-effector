@@ -1,13 +1,15 @@
-import { useTitle } from 'react-use'
-import { useParams } from 'react-router'
 import { useStore } from 'effector-react'
-import { $singleArticle, isPending } from '@/pages/article/model/store'
-import { getArticleBySlugFx } from './model'
 import { useEffect } from 'react'
+import { useParams } from 'react-router'
+import { useTitle } from 'react-use'
+
+import { $singleArticle, isPending } from '@/pages/article/model/store'
 import { ArticleBanner } from '@/pages/article/ui/article-banner'
+import { ArticleComments } from '@/pages/article/ui/article-comments'
 import { ArticleContent } from '@/pages/article/ui/article-content'
-import { ArticleMeta } from '@/pages/article/ui/article-meta/article-meta'
-import { ArticleCommentForm } from '@/pages/article/ui/article-comment-form/article-comment-form'
+import { ArticleMeta } from '@/pages/article/ui/article-meta'
+
+import { getArticleBySlugFx } from './model'
 
 export const ArticlePage = () => {
   const { slug } = useParams()
@@ -28,7 +30,7 @@ export const ArticlePage = () => {
               <div className="flex justify-center">
                 <ArticleMeta {...article} />
               </div>
-              <ArticleCommentForm />
+              <ArticleComments slug={article.slug} />
             </div>
           )}
     </div>

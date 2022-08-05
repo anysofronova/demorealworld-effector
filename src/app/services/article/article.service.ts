@@ -3,8 +3,8 @@ import { request } from '@/shared/http'
 import {
   IArticle,
   IArticleResponse,
-  UpdateArticleResponse,
   IArticleSingleResponse,
+  UpdateArticleResponse,
 } from '@/shared/interfaces'
 
 class ArticleService {

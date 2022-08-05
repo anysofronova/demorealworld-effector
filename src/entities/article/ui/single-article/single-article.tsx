@@ -1,11 +1,11 @@
 import { useStoreMap } from 'effector-react'
+import { Link } from 'react-router-dom'
 
 import { $articles } from '@/entities/article'
 
 import { ArticleContent } from '../article-content'
 import { ArticleFooter } from '../article-footer'
 import { ArticleHeader } from '../article-header'
-import { Link } from 'react-router-dom'
 
 type Props = { index: number }
 
