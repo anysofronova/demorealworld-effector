@@ -48,6 +48,7 @@
     "clsx": "^1.2.1",
     "effector": "^22.3.0",
     "effector-react": "^22.1.6",
+    "framer-motion": "^7.0.0",
     "js-cookie": "^3.0.1",
     "lodash.get": "^4.4.2",
     "patronum": "^1.9.0",
