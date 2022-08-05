@@ -1,9 +1,8 @@
+import { ArticleSingleSkeleton } from '@/shared/ui/atoms/article-list-skeleton/article-single-skeleton'
+
 export const ArticleListSkeleton = () => (
-  <div className="grid grid-cols-1 gap-6 mt-4 w-full">
-    <div className="relative p-4 w-full bg-white rounded-lg overflow-hidden rounded-lg">
-      <div className="animate-pulse flex flex-col">
-        <div className="rounded w-full h-80 bg-gray-200"></div>
-      </div>
-    </div>
+  <div className="flex flex-col mt-4 w-full gap-4 ">
+    <ArticleSingleSkeleton />
+    <ArticleSingleSkeleton />
   </div>
 )

@@ -12,7 +12,7 @@ export const SingleArticle = ({ index }: Props) => {
   const article = useStoreMap($articles, (articles) => articles[index])
 
   return (
-    <div className="px-10 my-4 py-6 bg-white rounded-lg shadow-md">
+    <div className="px-8 my-4 py-3 bg-white rounded-lg shadow-md">
       <ArticleHeader
         createdAt={article.createdAt}
         favoritesCount={article.favoritesCount}

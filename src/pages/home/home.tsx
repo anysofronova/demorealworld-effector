@@ -9,12 +9,12 @@ export const HomePage = () => {
   return (
     <div>
       <Banner />
-      <div className="container max-w-[1440px] mx-auto">
-        <div className="grid grid-rows-12 grid-flow-col-dense gap-4">
-          <div className="row-span-9">
+      <div className="container max-w-[1440px] mx-auto px-3">
+        <div className="grid grid-cols-12 grid-flow-col-dense gap-4">
+          <div className="col-span-9">
             <Tabs />
           </div>
-          <div className="row-span-3 mt-6">
+          <div className="col-span-3 mt-6">
             <p>tabs component</p>
           </div>
         </div>

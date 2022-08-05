@@ -1,1 +1,1 @@
-import * from './profile-tabs'
+export * from './profile-tabs'
