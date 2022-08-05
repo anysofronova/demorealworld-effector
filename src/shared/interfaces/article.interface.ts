@@ -23,6 +23,10 @@ export interface IArticleResponse {
   articlesCount: number
 }
 
+export interface IArticleSingleResponse {
+  article: IArticle
+}
+
 export interface ICreateArticle {
   title: string
   description: string

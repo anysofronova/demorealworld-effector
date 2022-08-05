@@ -1,6 +1,6 @@
+import { saveProfileToStorage } from '@/app/services/profile/profile.helper'
 import { request } from '@/shared/http'
 import { IProfileResponse } from '@/shared/interfaces'
-import { saveProfileToStorage } from '@/app/services/profile/profile.helper'
 
 class ProfileService {
   async getProfileByUsername(username: string) {
@@ -8,7 +8,7 @@ class ProfileService {
       url: `/api/profiles/${username}`,
       method: 'get',
     })
-    if (response.profile) saveProfileToStorage(response.profile)
+    if (response.profile) saveProfileToStorage(response)
     return response
   }
   async followProfile(username: string) {

@@ -12,6 +12,7 @@ import { ArticleFormFields } from '@/pages/editor/ui/article-form/article-form.t
 import { articleFormSchema } from '@/pages/editor/ui/article-form/schema/article-form.schema'
 import { CircleIcon } from '@/shared/ui'
 import { FormInput, FormTextarea } from '@/shared/ui/molecules'
+import { makeErrors } from '@/shared/utils/makeErrors'
 
 export const ArticleForm = () => {
   const {
@@ -35,8 +36,8 @@ export const ArticleForm = () => {
           navigate(routes.HOME_PAGE)
         }
       } catch (error: any) {
-        const [errorMessage] = Object.values(error.response.data.errors)
-        toast.error(errorMessage ? String(errorMessage) : 'Error')
+        console.log('error', error)
+        makeErrors(error.response?.data?.errors)
       }
     },
     [navigate, submitCreateForm],

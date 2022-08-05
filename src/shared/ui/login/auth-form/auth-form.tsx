@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { FC, useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useLocation } from 'react-router'
@@ -8,8 +9,10 @@ import { authService, profileService } from '@/app'
 import { routes } from '@/app/routing/routes'
 import { useAuth } from '@/shared/hooks/useAuth'
 import { CircleIcon } from '@/shared/ui'
+import { formValidationSchema } from '@/shared/ui/login/auth-form/form.schema'
 import { FormInput } from '@/shared/ui/molecules'
 import { FormPassword } from '@/shared/ui/molecules/form-password'
+import { makeErrors } from '@/shared/utils/makeErrors'
 
 import { AuthFormFields, IForm } from './auth-form.types'
 
@@ -18,7 +21,10 @@ export const AuthForm: FC<IForm> = ({ title, subTitle }) => {
     register,
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
-  } = useForm<AuthFormFields>()
+  } = useForm<AuthFormFields>({
+    mode: 'onChange',
+    resolver: yupResolver(formValidationSchema),
+  })
   const location = useLocation()
   const { setUser } = useAuth()
   const isSignUp = location?.pathname === '/register'
@@ -50,8 +56,8 @@ export const AuthForm: FC<IForm> = ({ title, subTitle }) => {
             })
         }
       } catch (error: any) {
-        const [errorMessage] = Object.values(error.response.data.errors)
-        toast.error(errorMessage ? String(errorMessage) : 'Error')
+        console.log('error', error)
+        makeErrors(error.response?.data?.errors)
       }
     },
     [isSignUp, navigate, setUser],

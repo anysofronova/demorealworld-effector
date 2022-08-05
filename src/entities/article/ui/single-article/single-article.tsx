@@ -1,4 +1,5 @@
 import { useStoreMap } from 'effector-react'
+import { Link } from 'react-router-dom'
 
 import { $articles } from '@/entities/article'
 
@@ -17,7 +18,12 @@ export const SingleArticle = ({ index }: Props) => {
         createdAt={article.createdAt}
         favoritesCount={article.favoritesCount}
       />
-      <ArticleContent description={article.description} title={article.title} />
+      <Link to={`/article/${article.slug}`}>
+        <ArticleContent
+          description={article.description}
+          title={article.title}
+        />
+      </Link>
       <ArticleFooter
         username={article.author.username}
         image={article.author.image}

@@ -8,6 +8,7 @@ const HomePage = namedLazy(() => import('@/pages'), 'HomePage')
 const SettingsPage = namedLazy(() => import('@/pages'), 'SettingsPage')
 const EditorPage = namedLazy(() => import('@/pages'), 'EditorPage')
 const ProfilePage = namedLazy(() => import('@/pages'), 'ProfilePage')
+const ArticlePage = namedLazy(() => import('@/pages'), 'ArticlePage')
 
 export const homeRouting: RouteObject[] = [
   {
@@ -40,6 +41,14 @@ export const homeRouting: RouteObject[] = [
     element: (
       <Suspensy>
         <ProfilePage />
+      </Suspensy>
+    ),
+  },
+  {
+    path: routes.ARTICLE_BY_SLUG,
+    element: (
+      <Suspensy>
+        <ArticlePage />
       </Suspensy>
     ),
   },
