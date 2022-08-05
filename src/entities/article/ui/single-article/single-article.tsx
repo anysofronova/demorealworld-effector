@@ -5,6 +5,7 @@ import { $articles } from '@/entities/article'
 import { ArticleContent } from '../article-content'
 import { ArticleFooter } from '../article-footer'
 import { ArticleHeader } from '../article-header'
+import { Link } from 'react-router-dom'
 
 type Props = { index: number }
 
@@ -17,7 +18,12 @@ export const SingleArticle = ({ index }: Props) => {
         createdAt={article.createdAt}
         favoritesCount={article.favoritesCount}
       />
-      <ArticleContent description={article.description} title={article.title} />
+      <Link to={`/article/${article.slug}`}>
+        <ArticleContent
+          description={article.description}
+          title={article.title}
+        />
+      </Link>
       <ArticleFooter
         username={article.author.username}
         image={article.author.image}

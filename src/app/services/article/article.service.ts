@@ -4,6 +4,7 @@ import {
   IArticle,
   IArticleResponse,
   UpdateArticleResponse,
+  IArticleSingleResponse,
 } from '@/shared/interfaces'
 
 class ArticleService {
@@ -22,10 +23,11 @@ class ArticleService {
     })
   }
   async getArticleBySlug(slug: string) {
-    return await request<IArticle>({
+    const response = await request<IArticleSingleResponse>({
       url: `/api/articles/${slug}`,
       method: 'get',
     })
+    return response.article
   }
   async deleteArticleBySlug(slug: string) {
     return await request<IArticle>({
