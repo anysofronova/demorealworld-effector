@@ -10,29 +10,35 @@ import { ArticleContent } from '@/pages/article/ui/article-content'
 import { ArticleMeta } from '@/pages/article/ui/article-meta'
 
 import { getArticleBySlugFx } from './model'
+import { ArticlePageSkeleton } from '@/shared/ui/atoms/article-page-skeleton'
+
+// todo навигация на 404 если нет статьи
 
 export const ArticlePage = () => {
   const { slug } = useParams()
+  console.log(slug)
   useEffect(() => {
-    getArticleBySlugFx(slug || '')
+    if (slug) getArticleBySlugFx(slug)
   }, [])
   const article = useStore($singleArticle)
   const isLoading = useStore(isPending)
   useTitle(article?.title || 'Article — Conduit')
   return (
     <div>
-      {isLoading
-        ? 'Loading'
-        : article && (
-            <div className="flex flex-col gap-4">
-              <ArticleBanner {...article} />
-              <ArticleContent {...article} />
-              <div className="flex justify-center">
-                <ArticleMeta {...article} />
-              </div>
-              <ArticleComments slug={article.slug} />
+      {isLoading ? (
+        <ArticlePageSkeleton />
+      ) : (
+        article && (
+          <div className="flex flex-col gap-4">
+            <ArticleBanner {...article} />
+            <ArticleContent {...article} />
+            <div className="flex justify-center">
+              <ArticleMeta {...article} />
             </div>
-          )}
+            <ArticleComments slug={article.slug} />
+          </div>
+        )
+      )}
     </div>
   )
 }
