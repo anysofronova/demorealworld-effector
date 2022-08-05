@@ -1,44 +1,50 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useCallback } from 'react'
+import { useGate } from 'effector-react'
+import { useCallback, useEffect, useLayoutEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { object, string } from 'yup'
 
-import { commentService } from '@/app/services/comment/comment.service'
+import { commentFormSubmitted } from '@/entities/comment/model/events'
 import { CircleIcon } from '@/shared/ui'
 import { FormTextarea } from '@/shared/ui/molecules'
 import { makeErrors } from '@/shared/utils/makeErrors'
-import { useEvent } from 'effector-react'
-import { addCommentSubmitted } from '@/entities/comment/model/events'
 
-const commentFormSchema = object({
-  body: string().required(),
-})
+import * as model from '../../model'
+import { addCommentFx } from '../../model'
+import { commentFormSchema } from '../comment-form/schema'
 
 export type CommentFormFields = {
   body: string
 }
+
 type CommentFormProps = {
   slug: string
 }
+
 export const CommentForm = ({ slug }: CommentFormProps) => {
+  useGate(model.Gate, { slug })
+
+  const defaultValues = {
+    body: '',
+  }
+
   const {
     register,
     handleSubmit,
     reset,
+    setFocus,
     formState: { errors, isValid, isDirty, isSubmitting },
   } = useForm<CommentFormFields>({
     mode: 'onChange',
     resolver: yupResolver(commentFormSchema),
   })
-  const submitAddComment = useEvent(addCommentSubmitted)
+
   const onSubmit: SubmitHandler<CommentFormFields> = useCallback(
     async (data) => {
       try {
-        const res = await commentService.addComment(data, slug)
+        const res = await addCommentFx({ slug, body: data.body })
         if (res) {
-          reset()
-          submitAddComment()
+          commentFormSubmitted(data)
           toast.success('Comment added successfully!')
         }
       } catch (error: any) {
@@ -46,8 +52,19 @@ export const CommentForm = ({ slug }: CommentFormProps) => {
         makeErrors(error.response?.data?.errors)
       }
     },
-    [submitAddComment],
+    [slug],
   )
+
+  useLayoutEffect(() => {
+    setFocus('body')
+  }, [setFocus])
+
+  useEffect(() =>
+    model.addCommentFx.done.watch(() => {
+      reset(defaultValues)
+    }),
+  )
+
   return (
     <div className="flex items-center justify-center">
       <form

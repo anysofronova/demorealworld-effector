@@ -1,4 +1,4 @@
 import { createEvent } from 'effector'
 
-export const addCommentSubmitted = createEvent()
-export const deleteCommentSubmitted = createEvent()
+export const commentFormSubmitted = createEvent<{ body: string }>()
+export const commentDeleted = createEvent<string>()

@@ -1,6 +1,7 @@
 import { BsTrash } from 'react-icons/all'
 import { Link } from 'react-router-dom'
-import { deleteCommentByIdFx } from '../..'
+
+import * as model from '@/entities/comment'
 
 type Props = {
   createdAt: Date
@@ -17,9 +18,10 @@ export const CommentHeader = ({
   slug,
   id,
 }: Props) => {
-  const onDeleteComment = () => {
-    deleteCommentByIdFx({ slug, id })
+  const handleDeleteComment = () => {
+    model.deleteCommentFx({ slug, id: String(id) })
   }
+
   return (
     <div className="flex gap-4 w-full relative">
       <div className="flex gap-4 w-full relative">
@@ -43,7 +45,7 @@ export const CommentHeader = ({
           </p>
         </div>
       </div>
-      <button className="cursor-pointer" onClick={() => onDeleteComment()}>
+      <button className="cursor-pointer" onClick={handleDeleteComment}>
         <BsTrash />
       </button>
     </div>

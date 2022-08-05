@@ -1,21 +1,35 @@
 import { restore, sample } from 'effector'
-import {
-  addCommentSubmitted,
-  deleteCommentSubmitted,
-} from '@/entities/comment/model/events'
-import { getCommentsBySlugFx } from './effect'
+import { createGate } from 'effector-react'
 
-export const $commentsWithCount = restore(getCommentsBySlugFx, null)
+import { addCommentFx, deleteCommentFx, getCommentsFx } from './effect'
+import { commentDeleted, commentFormSubmitted } from './events'
 
-export const isIdle = getCommentsBySlugFx.pending.map((pending) => !pending)
+export const $commentsList = restore(getCommentsFx, null)
 
-export const $comments = $commentsWithCount.map(
-  (comment) => comment?.comments ?? [],
-)
+export const $isIdle = getCommentsFx.pending.map((pending) => !pending)
+
+export const $comments = $commentsList.map((comment) => comment?.comments ?? [])
+
+export const Gate = createGate<{ slug: string }>()
+const $slug = Gate.state.map(({ slug }) => slug)
 
 sample({
-  clock: addCommentSubmitted,
-  filter: isIdle,
-  source: $commentsWithCount,
-  target: getCommentsBySlugFx,
+  source: $slug,
+  clock: commentFormSubmitted,
+  fn: (slug, fields) => ({ slug, ...fields }),
+  target: addCommentFx,
+})
+
+sample({
+  source: $slug,
+  clock: commentDeleted,
+  fn: (slug, id) => ({ slug, id }),
+  target: deleteCommentFx,
+})
+
+sample({
+  clock: [addCommentFx.doneData, deleteCommentFx.doneData],
+  filter: $isIdle,
+  source: $slug,
+  target: getCommentsFx,
 })

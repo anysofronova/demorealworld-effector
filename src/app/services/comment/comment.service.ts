@@ -1,24 +1,23 @@
-import { IComment, ICommentsResponse } from '@/shared/interfaces'
 import { request } from '@/shared/http'
-import { CommentFormFields } from '@/entities/comment/ui/comment-form'
+import * as types from '@/shared/interfaces'
 
 class CommentService {
-  async addComment(data: CommentFormFields, slug: string) {
-    return await request<IComment>({
+  async addComment({ slug, body }: types.AddCommentArgs) {
+    return await request<types.IComment>({
       url: `/api/articles/${slug}/comments`,
       method: 'post',
-      data: { comment: data },
+      data: { comment: { body } },
     })
   }
   async getCommentsBySlug(slug: string) {
-    return await request<ICommentsResponse>({
+    return await request<types.ICommentsResponse>({
       url: `/api/articles/${slug}/comments`,
       method: 'get',
     })
   }
-  async deleteCommentById({ slug, id }: { slug: string; id: number }) {
-    return await request<IComment>({
-      url: `/api/articles/${slug}/comments/${id}`,
+  async deleteComment({ slug, id }: types.DeleteCommentArgs) {
+    return await request({
+      url: `api/articles/${slug}/comments/${id}`,
       method: 'delete',
     })
   }

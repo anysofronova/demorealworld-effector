@@ -2,13 +2,13 @@ import { CommentContent } from '@/entities/comment/ui/comment-content'
 import { CommentHeader } from '@/entities/comment/ui/comment-header'
 import { IAuthor } from '@/shared/interfaces'
 
-type SingleCommentProps = {
+type SingleCommentProps = Readonly<{
   createdAt: Date
   body: string
   author: IAuthor
   slug: string
   id: number
-}
+}>
 
 export const SingleComment = ({
   createdAt,
