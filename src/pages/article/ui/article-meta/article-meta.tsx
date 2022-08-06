@@ -51,9 +51,12 @@ export const ArticleMeta = ({
         </div>
         {user?.username === author.username ? (
           <div className="flex justify-center items-center gap-2 sm:flex-row flex-col">
-            <button className="sm:h-2/3 sm:w-fit w-full border border-gray-300 rounded-sm text-sm font-light p-1 flex justify-center items-center gap-2  hover:border-indigo-600 transition-all">
+            <Link
+              to={`/editor/${slug}`}
+              className="sm:h-2/3 sm:w-fit w-full border border-gray-300 rounded-sm text-sm font-light p-1 flex justify-center items-center gap-2  hover:border-indigo-600 transition-all"
+            >
               <AiOutlineEdit /> Edit Article
-            </button>
+            </Link>
             <button
               onClick={() => handleDeleteArticle()}
               className="sm:h-2/3 sm:w-fit w-full border border-indigo-600 rounded-sm text-sm font-light p-1 flex justify-center items-center gap-2 hover:bg-white hover:text-black transition-all"

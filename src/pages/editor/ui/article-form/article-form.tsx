@@ -1,22 +1,31 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEvent } from 'effector-react'
-import { useCallback } from 'react'
+import { useEvent, useStore } from 'effector-react'
+import { useCallback, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { articleService } from '@/app/services/article/article.service'
 import { createFormSubmitted } from '@/entities/article/model/events'
-import { ArticleFormFields } from '@/pages/editor/ui/article-form/article-form.types'
+import {
+  ArticleData,
+  ArticleFormFields,
+} from '@/pages/editor/ui/article-form/article-form.types'
 import { articleFormSchema } from '@/pages/editor/ui/article-form/schema/article-form.schema'
 import { CircleIcon } from '@/shared/ui'
 import { FormInput, FormTextarea } from '@/shared/ui/molecules'
 import { makeErrors } from '@/shared/utils/makeErrors'
+import { getArticleBySlugFx } from '@/pages/article/model'
+import { $singleArticle, isPending } from '@/pages/article/model/store'
 
-export const ArticleForm = () => {
+type ArticleFormProps = {
+  slug: string
+}
+export const ArticleForm = ({ slug }: ArticleFormProps) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid, isDirty, isSubmitting },
   } = useForm<ArticleFormFields>({
     mode: 'onChange',
@@ -24,14 +33,37 @@ export const ArticleForm = () => {
   })
   const submitCreateForm = useEvent(createFormSubmitted)
   const navigate = useNavigate()
-
+  useEffect(() => {
+    if (slug) getArticleBySlugFx(slug)
+  }, [])
+  const article = useStore($singleArticle)
+  useEffect(() => {
+    if (article) {
+      Object.entries(article).map(([key, value]) =>
+        setValue(
+          key as ArticleData,
+          key === 'tagList' ? value.join(' ') : value,
+        ),
+      )
+    }
+  }, [article, setValue])
+  const isLoading = useStore(isPending)
+  console.log(article)
   const onSubmit: SubmitHandler<ArticleFormFields> = useCallback(
     async (data) => {
       try {
-        const res = await articleService.createArticle({
-          ...data,
-          tagList: String(data.tagList).split(' '),
-        })
+        const res = slug
+          ? await articleService.updateArticle(
+              {
+                ...data,
+                tagList: String(data.tagList).split(' '),
+              },
+              slug,
+            )
+          : await articleService.createArticle({
+              ...data,
+              tagList: String(data.tagList).split(' '),
+            })
         if (res) {
           submitCreateForm()
           toast.success('Article added successfully!')

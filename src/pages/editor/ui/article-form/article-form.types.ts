@@ -4,3 +4,5 @@ export type ArticleFormFields = {
   body: string
   tagList: string | string[]
 }
+
+export type ArticleData = keyof ArticleFormFields

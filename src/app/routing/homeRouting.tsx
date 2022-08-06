@@ -37,6 +37,14 @@ export const homeRouting: RouteObject[] = [
     ),
   },
   {
+    path: routes.EDITOR_BY_SLUG,
+    element: (
+      <Suspensy>
+        <EditorPage />
+      </Suspensy>
+    ),
+  },
+  {
     path: routes.PROFILE_PAGE,
     element: (
       <Suspensy>

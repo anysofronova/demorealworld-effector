@@ -15,11 +15,11 @@ class ArticleService {
       data: { article: data },
     })
   }
-  async updateArticle(data: UpdateArticleResponse) {
-    return await request<IArticle>({
-      url: `/api/articles`,
+  async updateArticle(data: ArticleFormFields, slug: string) {
+    return await request<IArticleSingleResponse>({
+      url: `/api/articles/${slug}`,
       method: 'put',
-      data,
+      data: { article: data },
     })
   }
   async getArticleBySlug(slug: string) {
