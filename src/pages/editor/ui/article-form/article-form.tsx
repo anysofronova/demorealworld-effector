@@ -56,13 +56,13 @@ export const ArticleForm = ({ slug }: ArticleFormProps) => {
           ? await articleService.updateArticle(
               {
                 ...data,
-                tagList: String(data.tagList).split(' '),
+                tagList: String(data.tagList).toLowerCase().split(' '),
               },
               slug,
             )
           : await articleService.createArticle({
               ...data,
-              tagList: String(data.tagList).split(' '),
+              tagList: String(data.tagList).toLowerCase().split(' '),
             })
         if (res) {
           submitCreateForm()

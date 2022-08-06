@@ -17,6 +17,7 @@ export const SingleArticle = ({ index }: Props) => {
       <ArticleHeader
         createdAt={article.createdAt}
         favoritesCount={article.favoritesCount}
+        tagList={article.tagList}
       />
       <Link to={`/article/${article.slug}`}>
         <ArticleContent
