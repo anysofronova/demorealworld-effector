@@ -9,7 +9,7 @@ import {
 
 class ArticleService {
   async createArticle(data: ArticleFormFields) {
-    return await request<IArticle>({
+    return await request<IArticleSingleResponse>({
       url: `/api/articles`,
       method: 'post',
       data: { article: data },

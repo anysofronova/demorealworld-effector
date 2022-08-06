@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { articleService } from '@/app/services/article/article.service'
-import { routes } from '@/app/routing/routes'
 import { createFormSubmitted } from '@/entities/article/model/events'
 import { ArticleFormFields } from '@/pages/editor/ui/article-form/article-form.types'
 import { articleFormSchema } from '@/pages/editor/ui/article-form/schema/article-form.schema'
@@ -33,7 +32,7 @@ export const ArticleForm = () => {
         if (res) {
           submitCreateForm()
           toast.success('Article added successfully!')
-          navigate(routes.HOME_PAGE)
+          navigate(`/article/${res.article.slug}`)
         }
       } catch (error: any) {
         console.log('error', error)
