@@ -28,7 +28,10 @@ export const ArticleForm = () => {
   const onSubmit: SubmitHandler<ArticleFormFields> = useCallback(
     async (data) => {
       try {
-        const res = await articleService.createArticle(data)
+        const res = await articleService.createArticle({
+          ...data,
+          tagList: String(data.tagList).split(' '),
+        })
         if (res) {
           submitCreateForm()
           toast.success('Article added successfully!')
