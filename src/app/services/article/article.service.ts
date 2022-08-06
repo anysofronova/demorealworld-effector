@@ -30,7 +30,7 @@ class ArticleService {
     return response.article
   }
   async deleteArticleBySlug(slug: string) {
-    return await request<IArticle>({
+    return await request({
       url: `/api/articles/${slug}`,
       method: 'delete',
     })

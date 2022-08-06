@@ -40,3 +40,7 @@ export type UpdateArticleResponse = { article: TUpdateArticle }
 export interface CreateArticleResponse {
   article: ICreateArticle
 }
+
+export type DeleteArticleArgs = Readonly<{
+  slug: string
+}>

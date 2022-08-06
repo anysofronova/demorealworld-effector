@@ -6,6 +6,7 @@ export const ArticleBanner = ({
   author,
   createdAt,
   favoritesCount,
+  slug,
 }: IArticle) => {
   return (
     <div className="relative inset-x-0 flex justify-center items-center w-full bg-gray-600 text-white py-8 gap-2 shadow-inner">
@@ -15,6 +16,7 @@ export const ArticleBanner = ({
           author={author}
           createdAt={createdAt}
           favoritesCount={favoritesCount}
+          slug={slug}
         />
       </div>
     </div>

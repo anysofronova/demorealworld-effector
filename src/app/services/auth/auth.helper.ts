@@ -7,5 +7,5 @@ export const removeTokenFromStorage = () => {
 }
 
 export const saveToStorage = (data: IUserResponse) => {
-  Cookies.set('accessToken', data.user.token)
+  Cookies.set('accessToken', data.user.token || '')
 }

@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { articleService } from '@/app'
+import { articleService } from '@/app/services/article/article.service'
 import { routes } from '@/app/routing/routes'
 import { createFormSubmitted } from '@/entities/article/model/events'
 import { ArticleFormFields } from '@/pages/editor/ui/article-form/article-form.types'
