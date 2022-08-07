@@ -1,8 +1,14 @@
-import { restore, sample } from 'effector'
+import { restore } from 'effector'
 
 import { getAllTagsFx } from './effect'
 
-export const $allTags = restore(getAllTagsFx, null)
+export const $tagsFromServer = restore(getAllTagsFx, null)
+export const $tags = $tagsFromServer.map((tag) => tag?.tags || [])
 export const isPending = getAllTagsFx.pending.map((pending) => pending)
 
-export const $tags = $allTags.map((tag) => tag?.tags ?? [])
+// forward({
+//   from: Gate.open,
+//   to: getAllTagsFx,
+// })
+
+// getAllTagsFx.doneData.watch(console.log)

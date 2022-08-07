@@ -6,10 +6,10 @@ import {
 } from 'react-icons/all'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { IAuthor } from '@/shared/interfaces'
-import { useAuth } from '@/shared/hooks/useAuth'
-import { deleteArticleFx } from '@/pages/article/model'
 import { routes } from '@/app/routing/routes'
+import { deleteArticleFx } from '@/pages/article/model'
+import { useAuth } from '@/shared/hooks/useAuth'
+import { IAuthor } from '@/shared/interfaces'
 
 type Props = {
   author: IAuthor
@@ -58,8 +58,8 @@ export const ArticleMeta = ({
               <AiOutlineEdit /> Edit Article
             </Link>
             <button
-              onClick={() => handleDeleteArticle()}
               className="sm:h-2/3 sm:w-fit w-full border border-indigo-600 rounded-sm text-sm font-light p-1 flex justify-center items-center gap-2 hover:bg-white hover:text-black transition-all"
+              onClick={handleDeleteArticle}
             >
               <BsTrash className="text-indigo-600" /> Delete Article (
               {favoritesCount})

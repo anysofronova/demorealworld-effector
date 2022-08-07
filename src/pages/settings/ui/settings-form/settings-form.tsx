@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useStore } from 'effector-react'
+import { useUnit } from 'effector-react'
 import { useCallback, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -15,11 +15,12 @@ import {
   SettingsFormFields,
 } from '@/pages/settings/ui/settings-form/settings-form.types'
 import { useAuth } from '@/shared/hooks/useAuth'
+import { makeErrors } from '@/shared/lib/makeErrors'
 import { CircleIcon, Skeleton } from '@/shared/ui'
 import { FormInput, FormTextarea } from '@/shared/ui/molecules'
-import { makeErrors } from '@/shared/utils/makeErrors'
 
 export const SettingsForm = () => {
+  const { user, setUser } = useAuth()
   const {
     register,
     handleSubmit,
@@ -55,15 +56,14 @@ export const SettingsForm = () => {
         makeErrors(error.response?.data?.errors)
       }
     },
-    [navigate],
+    [navigate, setUser],
   )
 
   useEffect(() => {
     getProfileInfoFx()
   }, [])
 
-  const loading = useStore(getProfileInfoFx.pending)
-  const { user, setUser } = useAuth()
+  const loading = useUnit(getProfileInfoFx.pending)
   useEffect(() => {
     if (user) {
       Object.entries(user).map(([key, value]) =>

@@ -7,17 +7,17 @@ import { toast } from 'react-toastify'
 
 import { articleService } from '@/app/services/article/article.service'
 import { createFormSubmitted } from '@/entities/article/model/events'
+import { getArticleBySlugFx } from '@/pages/article/model'
+import { $singleArticle, isPending } from '@/pages/article/model/store'
 import {
   ArticleData,
   ArticleFormFields,
 } from '@/pages/editor/ui/article-form/article-form.types'
 import { articleFormSchema } from '@/pages/editor/ui/article-form/schema/article-form.schema'
+import { makeErrors } from '@/shared/lib/makeErrors'
 import { CircleIcon } from '@/shared/ui'
-import { FormInput, FormTextarea } from '@/shared/ui/molecules'
-import { makeErrors } from '@/shared/utils/makeErrors'
-import { getArticleBySlugFx } from '@/pages/article/model'
-import { $singleArticle, isPending } from '@/pages/article/model/store'
 import { EditorSkeleton } from '@/shared/ui/atoms/editor-skeleton'
+import { FormInput, FormTextarea } from '@/shared/ui/molecules'
 
 type ArticleFormProps = {
   slug: string

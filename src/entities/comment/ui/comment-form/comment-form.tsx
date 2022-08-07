@@ -5,9 +5,9 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { commentFormSubmitted } from '@/entities/comment/model/events'
+import { makeErrors } from '@/shared/lib/makeErrors'
 import { CircleIcon } from '@/shared/ui'
 import { FormTextarea } from '@/shared/ui/molecules'
-import { makeErrors } from '@/shared/utils/makeErrors'
 
 import * as model from '../../model'
 import { addCommentFx } from '../../model'

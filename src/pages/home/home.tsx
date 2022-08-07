@@ -1,29 +1,41 @@
+import { useList, useStore, useUnit } from 'effector-react'
+import { useEffect } from 'react'
 import { useTitle } from 'react-use'
+
 import { Banner } from '@/pages/home/ui/banner'
 import { Tabs } from '@/pages/home/ui/tabs'
-import { useEffect } from 'react'
-import { $allTags, getAllTagsFx, isPending, $tags } from './model'
-import { useList, useStore } from 'effector-react'
 import { TagsSkeleton } from '@/shared/ui/atoms/tags-skeleton/tags-skeleton'
+
+import * as home from './model'
+import { tagSelected } from './model/events'
 
 export const HomePage = () => {
   useTitle('Home — Conduit')
+
   useEffect(() => {
-    getAllTagsFx()
+    home.getAllTagsFx()
   }, [])
-  const tags = useStore($allTags)
-  const isLoading = useStore(isPending)
-  const tagsList = useList<Readonly<string>>($tags, {
+
+  const tags = useUnit(home.$tags)
+  const isLoading = useStore(home.isPending)
+  const tagsList = useList<Readonly<string>>(home.$tags, {
     keys: [tags],
-    fn: (tag) => (
-      <div
-        key={tag}
-        className="px-1 py-0.5 text-gray-400 border border-gray-400 rounded-xl w-fit text-sm font-light cursor-pointer"
-      >
-        {tag}
-      </div>
-    ),
+    fn: (tag) => {
+      const handleClick = () => {
+        tagSelected(tag)
+      }
+      return (
+        <div
+          key={tag}
+          className="px-1 py-0.5 text-gray-400 border border-gray-400 rounded-xl w-fit text-sm font-light cursor-pointer"
+          onClick={handleClick}
+        >
+          {tag.toLowerCase()}
+        </div>
+      )
+    },
   })
+
   return (
     <div>
       <Banner />
