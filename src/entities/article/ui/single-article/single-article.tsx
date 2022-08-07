@@ -28,6 +28,7 @@ export const SingleArticle = ({ index }: Props) => {
       <ArticleFooter
         username={article.author.username}
         image={article.author.image}
+        slug={article.slug}
       />
     </div>
   )

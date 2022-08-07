@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 type Props = Readonly<{
   image: string
   username: string
+  slug: string
 }>
 
-export const ArticleFooter = ({ username, image }: Props) => {
+export const ArticleFooter = ({ username, image, slug }: Props) => {
   return (
     <div className="flex justify-between items-center mt-4">
-      <Link to="/" className="text-blue-600 hover:underline">
+      <Link to={`/article/${slug}`} className="text-blue-600 hover:underline">
         Read more
       </Link>
       <div>
