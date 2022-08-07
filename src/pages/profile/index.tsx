@@ -10,7 +10,7 @@ import {
   isPending,
 } from '@/pages/profile/model'
 import { useParams } from 'react-router'
-import { Skeleton } from '@/shared/ui/atoms/skeleton/skeleton'
+import ProfileSkeleton from '@/shared/ui/atoms/profile-skeleton/profile-skeleton'
 
 //todo доделатьь 404
 export const ProfilePage = () => {
@@ -24,7 +24,7 @@ export const ProfilePage = () => {
   return (
     <div>
       {isLoading ? (
-        <Skeleton />
+        <ProfileSkeleton />
       ) : profile ? (
         <div>
           <ProfileBanner {...profile} />
