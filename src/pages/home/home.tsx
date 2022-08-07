@@ -4,6 +4,7 @@ import { Tabs } from '@/pages/home/ui/tabs'
 import { useEffect } from 'react'
 import { $allTags, getAllTagsFx, isPending, $tags } from './model'
 import { useList, useStore } from 'effector-react'
+import { TagsSkeleton } from '@/shared/ui/atoms/tags-skeleton/tags-skeleton'
 
 export const HomePage = () => {
   useTitle('Home — Conduit')
@@ -32,8 +33,14 @@ export const HomePage = () => {
             <Tabs />
           </div>
           <div className="sm:col-span-3 sm:mt-6 sm:order-2 order-1 px-2 flex flex-col gap-2">
-            <p className="py-2 font-light text-lg">Popular Tags</p>
-            <div className="flex flex-wrap gap-0.5">{tagsList}</div>
+            {isLoading ? (
+              <TagsSkeleton />
+            ) : (
+              <div>
+                <p className="py-2 font-light text-lg">Popular Tags</p>
+                <div className="flex flex-wrap gap-0.5">{tagsList}</div>
+              </div>
+            )}
           </div>
         </div>
       </div>
