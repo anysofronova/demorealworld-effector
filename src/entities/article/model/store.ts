@@ -1,6 +1,6 @@
 import { restore, sample } from 'effector'
 
-import { getArticlesFx } from './effect'
+import { getArticlesFx, getFeedArticlesFx } from './effect'
 import { createFormSubmitted } from './events'
 
 export const $articlesWithCount = restore(getArticlesFx, null)
@@ -18,4 +18,16 @@ sample({
   filter: isIdle,
   source: $articlesWithCount,
   target: getArticlesFx,
+})
+
+export const $feedArticlesWithCount = restore(getFeedArticlesFx, null)
+export const isPendingFeed = getFeedArticlesFx.pending.map((pending) => pending)
+export const $feedArticles = $feedArticlesWithCount.map(
+  (article) => article?.articles ?? [],
+)
+sample({
+  clock: createFormSubmitted,
+  filter: isIdle,
+  source: $feedArticlesWithCount,
+  target: getFeedArticlesFx,
 })

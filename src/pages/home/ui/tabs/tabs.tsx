@@ -4,7 +4,14 @@ import { memo, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { routes } from '@/app/routing/routes'
-import { $articles, getArticlesFx, SingleArticle } from '@/entities/article'
+import {
+  $articles,
+  $feedArticles,
+  getArticlesFx,
+  getFeedArticlesFx,
+  isPendingFeed,
+  SingleArticle,
+} from '@/entities/article'
 import { isPending } from '@/pages/home/model'
 import { useAuth } from '@/shared/hooks/useAuth'
 import { IArticle } from '@/shared/interfaces'
@@ -13,13 +20,20 @@ import { ArticleListSkeleton } from '@/shared/ui'
 export const Tabs = memo(() => {
   const articles = useUnit($articles)
   const isLoading = useUnit(isPending)
+  const feedArticles = useUnit($feedArticles)
+  const isLoadingFeed = useUnit(isPendingFeed)
   const { user } = useAuth()
   const isAuth = Boolean(user)
   const articlesList = useList<IArticle>($articles, {
     keys: [articles],
     fn: (article, index) => <SingleArticle key={article.slug} index={index} />,
   })
+  const feedArticlesList = useList<IArticle>($feedArticles, {
+    keys: [feedArticles],
+    fn: (article, index) => <SingleArticle key={article.slug} index={index} />,
+  })
   useEffect(() => {
+    if (isAuth) getFeedArticlesFx()
     getArticlesFx()
   }, [])
 
@@ -49,21 +63,21 @@ export const Tabs = memo(() => {
               Global Feed
             </Tab>
           ) : null}
-          {/*{tag && (*/}
-          {/*  <Tab*/}
-          {/*    className={({ selected }) =>*/}
-          {/*      selected*/}
-          {/*        ? 'border-b-2 border-indigo-600 text-indigo-600 font-light text-lg px-4 py-2'*/}
-          {/*        : 'text-neutral-500 font-light text-lg px-4 py-2'*/}
-          {/*    }*/}
-          {/*  >*/}
-          {/*    <MdTag />*/}
-          {/*    {tag}*/}
-          {/*  </Tab>*/}
-          {/*)}*/}
         </Tab.List>
         <Tab.Panels>
-          {isAuth && <Tab.Panel>Content 1</Tab.Panel>}
+          {isAuth && (
+            <Tab.Panel>
+              {isLoadingFeed ? (
+                <ArticleListSkeleton />
+              ) : feedArticles.length > 0 ? (
+                <>{feedArticlesList}</>
+              ) : (
+                <div className="text-center font-light text-2xl py-8">
+                  No articles are here... yet.
+                </div>
+              )}
+            </Tab.Panel>
+          )}
           <Tab.Panel>
             {isLoading ? <ArticleListSkeleton /> : <>{articlesList}</>}
           </Tab.Panel>
