@@ -1,4 +1,4 @@
-import { useList, useStore, useUnit } from 'effector-react'
+import { useList, useUnit } from 'effector-react'
 import { useEffect } from 'react'
 import { useTitle } from 'react-use'
 
@@ -17,7 +17,7 @@ export const HomePage = () => {
   }, [])
 
   const tags = useUnit(home.$tags)
-  const isLoading = useStore(home.isPending)
+  const isLoading = useUnit(home.isPending)
   const tagsList = useList<Readonly<string>>(home.$tags, {
     keys: [tags],
     fn: (tag) => {

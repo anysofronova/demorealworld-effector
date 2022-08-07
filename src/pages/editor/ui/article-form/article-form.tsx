@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEvent, useStore } from 'effector-react'
+import { useEvent, useUnit } from 'effector-react'
 import { useCallback, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -34,10 +34,12 @@ export const ArticleForm = ({ slug }: ArticleFormProps) => {
   })
   const submitCreateForm = useEvent(createFormSubmitted)
   const navigate = useNavigate()
+
   useEffect(() => {
-    if (slug) getArticleBySlugFx(slug)
-  }, [])
-  const article = useStore($singleArticle)
+    slug && getArticleBySlugFx(slug)
+  }, [slug])
+
+  const article = useUnit($singleArticle)
   useEffect(() => {
     if (article) {
       Object.entries(article).map(([key, value]) =>
@@ -48,7 +50,7 @@ export const ArticleForm = ({ slug }: ArticleFormProps) => {
       )
     }
   }, [article, setValue])
-  const isLoading = useStore(isPending)
+  const isLoading = useUnit(isPending)
   const onSubmit: SubmitHandler<ArticleFormFields> = useCallback(
     async (data) => {
       try {
@@ -74,7 +76,7 @@ export const ArticleForm = ({ slug }: ArticleFormProps) => {
         makeErrors(error.response?.data?.errors)
       }
     },
-    [navigate, submitCreateForm],
+    [navigate, slug, submitCreateForm],
   )
 
   return (

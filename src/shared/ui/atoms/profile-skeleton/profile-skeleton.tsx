@@ -20,5 +20,3 @@ export const ProfileSkeleton = () => {
     </div>
   )
 }
-
-export default ProfileSkeleton
