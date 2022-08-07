@@ -8,7 +8,6 @@ class ProfileService {
       url: `/api/profiles/${username}`,
       method: 'get',
     })
-    if (response.profile) saveProfileToStorage(response)
     return response
   }
   async followProfile(username: string) {

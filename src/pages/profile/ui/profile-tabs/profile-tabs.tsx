@@ -1,6 +1,7 @@
 import { Tab } from '@headlessui/react'
+import { IProfileResponse } from '@/shared/interfaces'
 
-export const ProfileTabs = () => {
+export const ProfileTabs = ({ profile }: IProfileResponse) => {
   return (
     <div className="sm:container sm:mx-auto mt-4 px-2">
       <Tab.Group>
@@ -32,5 +33,3 @@ export const ProfileTabs = () => {
     </div>
   )
 }
-
-export default ProfileTabs

@@ -15,6 +15,7 @@ import { FormPassword } from '@/shared/ui/molecules/form-password'
 import { makeErrors } from '@/shared/utils/makeErrors'
 
 import { AuthFormFields, IForm } from './auth-form.types'
+import { saveProfileToStorage } from '@/app/services/profile/profile.helper'
 
 export const AuthForm: FC<IForm> = ({ title, subTitle }) => {
   const {
@@ -51,6 +52,7 @@ export const AuthForm: FC<IForm> = ({ title, subTitle }) => {
               }
               delete user.following
               setUser(user)
+              saveProfileToStorage(user)
               toast.success('Successful authorization!')
               navigate(routes.HOME_PAGE)
             })
