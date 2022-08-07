@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEvent, useUnit } from 'effector-react'
+import { useUnit } from 'effector-react'
 import { useCallback, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -22,6 +22,7 @@ import { FormInput, FormTextarea } from '@/shared/ui/molecules'
 type ArticleFormProps = {
   slug: string
 }
+
 export const ArticleForm = ({ slug }: ArticleFormProps) => {
   const {
     register,
@@ -32,7 +33,7 @@ export const ArticleForm = ({ slug }: ArticleFormProps) => {
     mode: 'onChange',
     resolver: yupResolver(articleFormSchema),
   })
-  const submitCreateForm = useEvent(createFormSubmitted)
+  const submitCreateForm = useUnit(createFormSubmitted)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -42,12 +43,12 @@ export const ArticleForm = ({ slug }: ArticleFormProps) => {
   const article = useUnit($singleArticle)
   useEffect(() => {
     if (article) {
-      Object.entries(article).map(([key, value]) =>
-        setValue(
-          key as ArticleData,
-          key === 'tagList' ? value.join(' ') : value,
-        ),
-      )
+      Object.entries(article).map(([key, value]) => {
+        if (key === 'tagList') {
+          setValue('tagList', (value as string[]).join(' '))
+        }
+        setValue(key as ArticleData, value as string | string[])
+      })
     }
   }, [article, setValue])
   const isLoading = useUnit(isPending)

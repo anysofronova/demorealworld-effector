@@ -17,7 +17,7 @@ class CommentService {
   }
   async deleteComment({ slug, id }: types.DeleteCommentArgs) {
     return await request({
-      url: `api/articles/${slug}/comments/${id}`,
+      url: `/api/articles/${slug}/comments/${id}`,
       method: 'delete',
     })
   }

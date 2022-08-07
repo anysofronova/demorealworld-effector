@@ -1,4 +1,5 @@
 export * from './article-content'
 export * from './article-footer'
 export * from './article-header'
+export * from './empty-feed'
 export * from './single-article'

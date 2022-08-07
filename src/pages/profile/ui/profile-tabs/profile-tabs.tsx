@@ -1,4 +1,5 @@
 import { Tab } from '@headlessui/react'
+
 import { IProfileResponse } from '@/shared/interfaces'
 
 export const ProfileTabs = ({ profile }: IProfileResponse) => {

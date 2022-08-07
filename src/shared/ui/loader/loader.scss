@@ -27,7 +27,8 @@
 .loading-spinner__circle-stroke {
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
-  animation: loading-spinner-dash 2s ease-in-out infinite, loading-spinner-color 8s ease-in-out infinite;
+  animation: loading-spinner-dash 2s ease-in-out infinite,
+    loading-spinner-color 8s ease-in-out infinite;
   stroke-linecap: round;
   stroke-width: 4px;
 }

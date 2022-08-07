@@ -10,7 +10,6 @@ import { CircleIcon } from '@/shared/ui'
 import { FormTextarea } from '@/shared/ui/molecules'
 
 import * as model from '../../model'
-import { addCommentFx } from '../../model'
 import { commentFormSchema } from '../comment-form/schema'
 
 export type CommentFormFields = {
@@ -42,17 +41,14 @@ export const CommentForm = ({ slug }: CommentFormProps) => {
   const onSubmit: SubmitHandler<CommentFormFields> = useCallback(
     async (data) => {
       try {
-        const res = await addCommentFx({ slug, body: data.body })
-        if (res) {
-          commentFormSubmitted(data)
-          toast.success('Comment added successfully!')
-        }
+        commentFormSubmitted(data)
+        toast.success('Comment added successfully!')
       } catch (error: any) {
         console.log('error', error)
         makeErrors(error.response?.data?.errors)
       }
     },
-    [slug],
+    [],
   )
 
   useLayoutEffect(() => {

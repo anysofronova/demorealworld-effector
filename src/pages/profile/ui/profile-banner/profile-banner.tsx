@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { defaultImageUrl } from '@/app/config'
 import { routes } from '@/app/routing/routes'
-import { IProfileResponse } from '@/shared/interfaces'
 import { useAuth } from '@/shared/hooks/useAuth'
+import { IProfileResponse } from '@/shared/interfaces'
 
 export const ProfileBanner = ({ profile }: IProfileResponse) => {
   const { user } = useAuth()

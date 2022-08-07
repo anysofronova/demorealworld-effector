@@ -1,7 +1,7 @@
+import { useParams } from 'react-router'
 import { useTitle } from 'react-use'
 
 import { ArticleForm } from '@/pages/editor/ui/article-form'
-import { useParams } from 'react-router'
 
 export const EditorPage = () => {
   useTitle('Editor — Conduit')

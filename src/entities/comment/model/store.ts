@@ -28,7 +28,7 @@ sample({
 })
 
 sample({
-  clock: [addCommentFx.doneData, deleteCommentFx.doneData],
+  clock: [addCommentFx.done, deleteCommentFx.done],
   filter: $isIdle,
   source: $slug,
   target: getCommentsFx,

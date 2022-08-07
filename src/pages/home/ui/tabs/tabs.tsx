@@ -1,41 +1,19 @@
 import { Tab } from '@headlessui/react'
-import { useList, useUnit } from 'effector-react'
 import { memo, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { routes } from '@/app/routing/routes'
-import {
-  $articles,
-  $feedArticles,
-  getArticlesFx,
-  getFeedArticlesFx,
-  isPendingFeed,
-  SingleArticle,
-} from '@/entities/article'
-import { isPending } from '@/pages/home/model'
+import { getArticlesFx } from '@/entities/article'
+import GlobalFeedPage from '@/pages/home/pages/global-feed'
+import { YourFeedPage } from '@/pages/home/pages/your-feed'
 import { useAuth } from '@/shared/hooks/useAuth'
-import { IArticle } from '@/shared/interfaces'
-import { ArticleListSkeleton } from '@/shared/ui'
 
 export const Tabs = memo(() => {
-  const articles = useUnit($articles)
-  const isLoading = useUnit(isPending)
-  const feedArticles = useUnit($feedArticles)
-  const isLoadingFeed = useUnit(isPendingFeed)
   const { user } = useAuth()
   const isAuth = Boolean(user)
-  const articlesList = useList<IArticle>($articles, {
-    keys: [articles],
-    fn: (article, index) => <SingleArticle key={article.slug} index={index} />,
-  })
-  const feedArticlesList = useList<IArticle>($feedArticles, {
-    keys: [feedArticles],
-    fn: (article, index) => <SingleArticle key={article.slug} index={index} />,
-  })
   useEffect(() => {
-    if (isAuth) getFeedArticlesFx()
-    getArticlesFx()
-  }, [])
+    isAuth && getArticlesFx()
+  }, [isAuth])
 
   return (
     <div className="sm:container sm:mx-auto mt-4 px-2">
@@ -67,19 +45,11 @@ export const Tabs = memo(() => {
         <Tab.Panels>
           {isAuth && (
             <Tab.Panel>
-              {isLoadingFeed ? (
-                <ArticleListSkeleton />
-              ) : feedArticles.length > 0 ? (
-                <>{feedArticlesList}</>
-              ) : (
-                <div className="text-center font-light text-2xl py-8">
-                  No articles are here... yet.
-                </div>
-              )}
+              <YourFeedPage />
             </Tab.Panel>
           )}
           <Tab.Panel>
-            {isLoading ? <ArticleListSkeleton /> : <>{articlesList}</>}
+            <GlobalFeedPage />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

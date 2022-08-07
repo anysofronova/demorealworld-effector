@@ -1,10 +1,10 @@
 import { ArticleFormFields } from '@/pages/editor/ui/article-form/article-form.types'
 import { request } from '@/shared/http'
 import {
-  IArticle,
   IArticleResponse,
   IArticleSingleResponse,
-  UpdateArticleResponse,
+  SelectedArticle,
+  ToggleFavoriteArticleResponse,
 } from '@/shared/interfaces'
 
 class ArticleService {
@@ -45,6 +45,19 @@ class ArticleService {
     return await request<IArticleResponse>({
       url: `/api/articles`,
       method: 'get',
+    })
+  }
+  async setFavoriteArticle({ slug }: SelectedArticle) {
+    return request<ToggleFavoriteArticleResponse>({
+      url: `/api/articles/${slug}/favorite`,
+      method: 'post',
+    })
+  }
+
+  setUnfavoriteArticle = ({ slug }: SelectedArticle) => {
+    return request<ToggleFavoriteArticleResponse>({
+      url: `/api/articles/${slug}/favorite`,
+      method: 'delete',
     })
   }
 }

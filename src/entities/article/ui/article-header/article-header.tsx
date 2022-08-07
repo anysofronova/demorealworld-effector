@@ -1,16 +1,27 @@
 import { AiTwotoneHeart } from 'react-icons/all'
 
+import { SelectedArticle } from '@/shared/interfaces'
+
 type Props = Readonly<{
   createdAt: Date
+  favorited: boolean
+  slug: string
   favoritesCount: number
-  tagList: string[]
+  tagList: readonly string[]
+  onClick: (payload: SelectedArticle) => void
 }>
 
 export const ArticleHeader = ({
   createdAt,
   favoritesCount,
   tagList,
+  slug,
+  favorited,
+  onClick,
 }: Props) => {
+  const handleClick = () => {
+    onClick({ slug, favorited, favoritesCount })
+  }
   return (
     <div className="flex justify-between items-center gap-1">
       <span className="font-light text-gray-600">
@@ -26,7 +37,10 @@ export const ArticleHeader = ({
           </div>
         ))}
       </div>
-      <button className="flex items-center bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded">
+      <button
+        className="flex items-center bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded"
+        onClick={handleClick}
+      >
         <AiTwotoneHeart className="mr-0.5" /> {favoritesCount}
       </button>
     </div>

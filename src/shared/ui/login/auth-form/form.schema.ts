@@ -1,7 +1,7 @@
 import { object, string } from 'yup'
 
 export const formValidationSchema = object({
-  name: string()
+  username: string()
     .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field')
     .min(3, 'Name should be at least 3 characters'),
   email: string()

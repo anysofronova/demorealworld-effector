@@ -1,14 +1,12 @@
-import { saveProfileToStorage } from '@/app/services/profile/profile.helper'
 import { request } from '@/shared/http'
 import { IProfileResponse } from '@/shared/interfaces'
 
 class ProfileService {
   async getProfileByUsername(username: string) {
-    const response = await request<IProfileResponse>({
+    return await request<IProfileResponse>({
       url: `/api/profiles/${username}`,
       method: 'get',
     })
-    return response
   }
   async followProfile(username: string) {
     await request<IProfileResponse>({

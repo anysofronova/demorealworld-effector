@@ -16,23 +16,26 @@ This is an Effector new version of [https://demo.realworld.io/]
 
 ## Getting started (Project initialisation)
 
-1) __Copy .env and adjust env vars if necessary__
+1. **Copy .env and adjust env vars if necessary**
+
 ```bash
 $  cp .env.local.example .env.local
 ```
 
+2. Install dependencies.
 
-2) Install dependencies.
 ```bash
 $  pnpm i
 ```
 
-3) Start dev server with hot reload at http://localhost:3000.
+3. Start dev server with hot reload at http://localhost:3000.
+
 ```bash
 $  pnpm run dev
 ```
 
 ## You can also start dev server using Docker and then open it at http://0.0.0.0:4200 .
+
 ```bash
 $  docker-compose up
 ```
@@ -41,7 +44,6 @@ $  docker-compose up
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-
 
 ### Lint commands
 
