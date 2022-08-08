@@ -1,6 +1,7 @@
 import { Tab } from '@headlessui/react'
 import { memo, useEffect } from 'react'
 import { MdGrid3X3 } from 'react-icons/all'
+import { useLocation } from 'react-router'
 import { NavLink } from 'react-router-dom'
 
 import { routes } from '@/app/routing/routes'
@@ -10,12 +11,10 @@ import GlobalFeedPage from '@/pages/home/pages/global-feed'
 import { YourFeedPage } from '@/pages/home/pages/your-feed'
 import { useAuth } from '@/shared/hooks/useAuth'
 
-import * as model from '../../model'
-
 export const Tabs = memo(() => {
   const { user } = useAuth()
-  const tag = model.selectors.useTagQuery()
-
+  const location = useLocation()
+  const tag = location.search.split('=')[1]
   const isAuth = Boolean(user)
 
   useEffect(() => {
@@ -38,15 +37,17 @@ export const Tabs = memo(() => {
             </Tab>
           </NavLink>
           {isAuth ? (
-            <Tab
-              className={({ selected }) =>
-                selected
-                  ? 'border-b-2 border-indigo-600 text-indigo-600 font-light text-lg px-4 py-2'
-                  : 'text-neutral-500 font-light text-lg px-4 py-2'
-              }
-            >
-              Global Feed
-            </Tab>
+            <NavLink to={routes.HOME_PAGE}>
+              <Tab
+                className={({ selected }) =>
+                  selected
+                    ? 'border-b-2 border-indigo-600 text-indigo-600 font-light text-lg px-4 py-2'
+                    : 'text-neutral-500 font-light text-lg px-4 py-2'
+                }
+              >
+                Global Feed
+              </Tab>
+            </NavLink>
           ) : null}
           {tag && (
             <Tab
@@ -56,8 +57,10 @@ export const Tabs = memo(() => {
                   : 'text-neutral-500 font-light text-lg px-4 py-2'
               }
             >
-              <MdGrid3X3 className="mr-2" />
-              {tag}
+              <div className="flex items-center">
+                <MdGrid3X3 className="mr-2" />
+                {tag}
+              </div>
             </Tab>
           )}
         </Tab.List>

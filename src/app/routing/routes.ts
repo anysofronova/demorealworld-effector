@@ -1,5 +1,6 @@
 export const routes = {
   HOME_PAGE: '/',
+  FEED_BY_TAG: '/feed-by-tag',
   LOGIN: '/login',
   REGISTER: '/register',
   SETTINGS_PAGE: '/settings',

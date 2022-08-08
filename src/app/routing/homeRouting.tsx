@@ -21,6 +21,15 @@ export const homeRouting: RouteObject[] = [
     ),
   },
   {
+    path: routes.FEED_BY_TAG,
+    index: true,
+    element: (
+      <Suspensy>
+        <HomePage />
+      </Suspensy>
+    ),
+  },
+  {
     path: routes.SETTINGS_PAGE,
     element: (
       <Suspensy>

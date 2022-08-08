@@ -1,6 +1,8 @@
 import { useGate, useList, useUnit } from 'effector-react'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
+import { routes } from '@/app/routing/routes'
 import * as home from '@/pages/home/model'
 import { tagSelected } from '@/pages/home/model/events'
 import { TagsSkeleton } from '@/shared/ui/atoms/tags-skeleton'
@@ -14,13 +16,14 @@ export const Sidebar = () => {
         tagSelected(tag)
       }
       return (
-        <button
+        <Link
+          to={`${routes.FEED_BY_TAG}?tag=${tag}`}
           type="button"
           className="px-1 py-0.5 text-gray-400 border border-gray-400 rounded-xl w-fit text-sm font-light cursor-pointer"
           onClick={handleClick}
         >
           {tag.toLowerCase()}
-        </button>
+        </Link>
       )
     },
   })
