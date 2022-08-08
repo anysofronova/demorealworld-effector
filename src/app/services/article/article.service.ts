@@ -1,11 +1,17 @@
 import { ArticleFormFields } from '@/pages/editor/ui/article-form/article-form.types'
-import { request } from '@/shared/http'
+import { request } from '@/shared/api/http'
 import {
   IArticleResponse,
   IArticleSingleResponse,
   SelectedArticle,
   ToggleFavoriteArticleResponse,
 } from '@/shared/interfaces'
+
+type ArticlesParams = {
+  limit: number
+  offset: number
+  tag: string
+}
 
 class ArticleService {
   async createArticle(data: ArticleFormFields) {
@@ -41,11 +47,14 @@ class ArticleService {
       method: 'get',
     })
   }
-  async getRecentArticles() {
-    return await request<IArticleResponse>({
-      url: `/api/articles`,
-      method: 'get',
-    })
+  async getRecentArticles(params?: ArticlesParams) {
+    return await request<IArticleResponse>(
+      {
+        url: `/api/articles`,
+        method: 'get',
+      },
+      params,
+    )
   }
   async setFavoriteArticle({ slug }: SelectedArticle) {
     return request<ToggleFavoriteArticleResponse>({

@@ -1,4 +1,5 @@
 import { createEffect } from 'effector'
+import { useUnit } from 'effector-react'
 
 import * as article from '@/entities/article'
 
@@ -15,3 +16,9 @@ export const {
 } = article.createFeed({
   effect: getFeedFx,
 })
+
+export const selectors = {
+  useGetFeedLoading: (): boolean => useUnit(getFeedFx.pending),
+  useIsEmptyFeed: () => useUnit($isEmptyFeed),
+  useTotalPages: () => useUnit($totalPages),
+}

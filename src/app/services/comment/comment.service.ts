@@ -1,4 +1,4 @@
-import { request } from '@/shared/http'
+import { request } from '@/shared/api/http'
 import * as types from '@/shared/interfaces'
 
 class CommentService {

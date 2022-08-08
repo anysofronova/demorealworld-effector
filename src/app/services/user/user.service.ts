@@ -1,5 +1,5 @@
 import { SettingsFormFields } from '@/pages/settings/ui/settings-form/settings-form.types'
-import { request } from '@/shared/http'
+import { request } from '@/shared/api/http'
 import { IUserResponse } from '@/shared/interfaces'
 
 class UserService {

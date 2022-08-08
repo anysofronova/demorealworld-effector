@@ -2,8 +2,8 @@ import { SyntheticEvent } from 'react'
 import { AiOutlinePlus, IoSettingsOutline } from 'react-icons/all'
 import { Link } from 'react-router-dom'
 
-import { defaultImageUrl } from '@/app/config'
 import { routes } from '@/app/routing/routes'
+import { defaultImageUrl } from '@/shared/config'
 import { useAuth } from '@/shared/hooks/useAuth'
 import { IProfileResponse } from '@/shared/interfaces'
 

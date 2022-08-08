@@ -1,4 +1,4 @@
-import { restore, sample } from 'effector'
+import { restore } from 'effector'
 
 import { getProfileByUsernameFx } from './effect'
 

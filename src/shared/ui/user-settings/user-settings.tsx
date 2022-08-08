@@ -2,8 +2,8 @@ import { SyntheticEvent } from 'react'
 import { AiOutlineEdit, IoSettingsOutline } from 'react-icons/all'
 import { Link } from 'react-router-dom'
 
-import { defaultImageUrl } from '@/app/config'
 import { routes } from '@/app/routing/routes'
+import { defaultImageUrl } from '@/shared/config'
 import { IUser } from '@/shared/interfaces/user.interface'
 
 type UserSettingsProps = {

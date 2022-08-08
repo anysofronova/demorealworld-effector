@@ -13,3 +13,6 @@ export const $locationSearch = $location.map((location) => location.search)
 history.listen((location) => {
   locationUpdated(location)
 })
+
+export const createQueryStore = (name: string) =>
+  $locationSearch.map((search) => new URLSearchParams(search).get(name))

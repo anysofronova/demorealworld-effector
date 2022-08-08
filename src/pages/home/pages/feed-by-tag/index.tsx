@@ -1,5 +1,12 @@
+import { useEffect } from 'react'
+import {
+  NumberParam,
+  StringParam,
+  useQueryParams,
+  withDefault,
+} from 'use-query-params'
+
 import { Feed } from '@/entities/article/ui/feed'
-import { useFeed } from '@/shared/hooks'
 import { Pagination } from '@/shared/ui/pagination'
 
 import * as model from './model'
@@ -27,4 +34,32 @@ export const FeedByTagPage = ({ pageSize = 10 }: Props) => {
       />
     </>
   )
+}
+
+function useFeed(pageSize: number) {
+  const [{ page, tag }, setQuery] = useQueryParams({
+    page: withDefault(NumberParam, 1),
+    tag: StringParam,
+  })
+  const loading = model.selectors.useGetFeedLoading()
+  const isEmpty = model.selectors.useIsEmptyFeed()
+  const totalPages = model.selectors.useTotalPages()
+
+  useEffect(() => {
+    if (tag) {
+      model.getFeedFx({ page, tag, pageSize })
+    }
+  }, [page, tag, pageSize])
+
+  const handlePageChange = (x: number) => {
+    setQuery({ page: x })
+  }
+
+  return {
+    page,
+    loading,
+    isEmpty,
+    totalPages,
+    handlePageChange,
+  }
 }

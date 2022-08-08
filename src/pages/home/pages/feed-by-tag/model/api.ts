@@ -1,4 +1,4 @@
-import * as http from '@/shared/http'
+import * as http from '@/shared/api/http'
 import { FeedType } from '@/shared/interfaces'
 import { limit } from '@/shared/lib'
 
