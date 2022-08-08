@@ -42,12 +42,11 @@ export const ArticleForm = ({ slug }: ArticleFormProps) => {
 
   const article = useUnit($singleArticle)
   useEffect(() => {
-    if (article) {
+    if (article && slug) {
       Object.entries(article).map(([key, value]) => {
         if (key === 'tagList') {
           setValue('tagList', (value as string[]).join(' '))
-        }
-        setValue(key as ArticleData, value as string | string[])
+        } else setValue(key as ArticleData, value as string | string[])
       })
     }
   }, [article, setValue])
