@@ -2,20 +2,20 @@ import * as http from '@/shared/api/http'
 import { FeedType } from '@/shared/interfaces'
 import { limit } from '@/shared/lib'
 
-export type getArticlesByUserFxArgs = Readonly<{
+export type getFavoritedArticlesByUserFxArgs = Readonly<{
   pageSize: number
   page: number
-  author: string
+  favorited: string
 }>
 
-export const getArticlesByUser = ({
+export const getFavoritedArticlesByUser = ({
   pageSize,
   page,
-  author,
-}: getArticlesByUserFxArgs) => {
+  favorited,
+}: getFavoritedArticlesByUserFxArgs) => {
   const pageIndex = page - 1
   return http.request<FeedType>({
-    url: `/api/articles?author=${author}&${limit(pageSize, pageIndex)}`,
+    url: `/api/articles?favorited=${favorited}&${limit(pageSize, pageIndex)}`,
     method: 'get',
   })
 }
