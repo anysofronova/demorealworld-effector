@@ -16,13 +16,13 @@ export const Tabs = memo(() => {
   const location = useLocation()
   const tag = location.search.split('=')[1]
   const isAuth = Boolean(user)
-  const [selectedIndex, setSelectedIndex] = useState(tag ? 2 : 0)
+  const [selectedIndex, setSelectedIndex] = useState(!tag ? 0 : isAuth ? 2 : 1)
   useEffect(() => {
     isAuth && getArticlesFx()
   }, [isAuth])
   useEffect(() => {
-    setSelectedIndex(tag ? 2 : selectedIndex)
-  }, [location])
+    setSelectedIndex(!tag ? selectedIndex : isAuth ? 2 : 1)
+  }, [location, isAuth])
 
   return (
     <div className="sm:container sm:mx-auto mt-4 px-2">

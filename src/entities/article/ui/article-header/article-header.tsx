@@ -3,8 +3,9 @@ import { AiTwotoneHeart } from 'react-icons/all'
 import { SelectedArticle } from '@/shared/interfaces'
 import { routes } from '@/app/routing/routes'
 import { tagSelected } from '@/pages/home/model/events'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import classnames from 'classnames'
+import { useAuth } from '@/shared/hooks'
 
 type Props = Readonly<{
   createdAt: Date
@@ -23,8 +24,12 @@ export const ArticleHeader = ({
   favorited,
   onClick,
 }: Props) => {
+  const navigate = useNavigate()
+  const isAuth = useAuth()
   const handleClick = () => {
-    onClick({ slug, favorited, favoritesCount })
+    isAuth.user
+      ? onClick({ slug, favorited, favoritesCount })
+      : navigate(routes.LOGIN)
   }
   const tagHandleClick = (i: string) => {
     tagSelected(i)
