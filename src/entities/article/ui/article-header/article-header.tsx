@@ -1,6 +1,9 @@
 import { AiTwotoneHeart } from 'react-icons/all'
 
 import { SelectedArticle } from '@/shared/interfaces'
+import { routes } from '@/app/routing/routes'
+import { tagSelected } from '@/pages/home/model/events'
+import { Link } from 'react-router-dom'
 
 type Props = Readonly<{
   createdAt: Date
@@ -22,6 +25,9 @@ export const ArticleHeader = ({
   const handleClick = () => {
     onClick({ slug, favorited, favoritesCount })
   }
+  const tagHandleClick = (i: string) => {
+    tagSelected(i)
+  }
   return (
     <div className="flex justify-between items-center gap-1">
       <span className="font-light text-gray-600">
@@ -29,12 +35,15 @@ export const ArticleHeader = ({
       </span>
       <div className="flex gap-0.5 justify-end flex-1">
         {tagList.map((i) => (
-          <div
+          <Link
+            to={`${routes.FEED_BY_TAG}?tag=${i}`}
+            type="button"
+            onClick={() => tagHandleClick(i)}
             key={i}
             className="px-1 py-0.5 text-gray-400 border border-gray-400 rounded-xl w-fit text-sm font-light cursor-pointer"
           >
             {i}
-          </div>
+          </Link>
         ))}
       </div>
       <button

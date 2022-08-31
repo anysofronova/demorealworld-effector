@@ -1,6 +1,6 @@
 import { Tab } from '@headlessui/react'
-import { memo, useEffect } from 'react'
-import { MdGrid3X3 } from 'react-icons/all'
+import { memo, useEffect, useState } from 'react'
+import { HiOutlineHashtag } from 'react-icons/all'
 import { useLocation } from 'react-router'
 import { NavLink } from 'react-router-dom'
 
@@ -16,14 +16,17 @@ export const Tabs = memo(() => {
   const location = useLocation()
   const tag = location.search.split('=')[1]
   const isAuth = Boolean(user)
-
+  const [selectedIndex, setSelectedIndex] = useState(tag ? 2 : 0)
   useEffect(() => {
     isAuth && getArticlesFx()
   }, [isAuth])
+  useEffect(() => {
+    setSelectedIndex(tag ? 2 : selectedIndex)
+  }, [location])
 
   return (
     <div className="sm:container sm:mx-auto mt-4 px-2">
-      <Tab.Group>
+      <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
         <Tab.List className="border-b border-neutral-500">
           <NavLink to={routes.HOME_PAGE}>
             <Tab
@@ -58,7 +61,7 @@ export const Tabs = memo(() => {
               }
             >
               <div className="flex items-center">
-                <MdGrid3X3 className="mr-2" />
+                <HiOutlineHashtag className="mr-2" />
                 {tag}
               </div>
             </Tab>
