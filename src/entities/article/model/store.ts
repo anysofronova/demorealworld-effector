@@ -14,6 +14,10 @@ export type Feed = {
   articlesCount: number
 }
 
+export const isPending =
+  setFavoriteArticleFx.pending.map((pending) => pending) &&
+  setUnfavoriteArticleFx.pending.map((pending) => pending)
+
 type Options = {
   effect: Effect<any, Feed, any>
 }
@@ -38,7 +42,6 @@ export const createFeed = ({ effect }: Options) => {
           : {
               ...article,
               favorited: !article.favorited,
-              favoritesCount: article.favoritesCount + 1,
             },
       ),
     }))
