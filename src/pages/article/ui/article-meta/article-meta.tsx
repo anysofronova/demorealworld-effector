@@ -61,8 +61,7 @@ export const ArticleMeta = ({
               className="sm:h-2/3 sm:w-fit w-full border border-indigo-600 rounded-sm text-sm font-light p-1 flex justify-center items-center gap-2 hover:bg-white hover:text-black transition-all"
               onClick={handleDeleteArticle}
             >
-              <BsTrash className="text-indigo-600" /> Delete Article (
-              {favoritesCount})
+              <BsTrash className="text-indigo-600" /> Delete Article
             </button>
           </div>
         ) : (

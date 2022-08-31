@@ -3,9 +3,9 @@ import { useList } from 'effector-react'
 
 import { SingleArticle } from '@/entities/article'
 import { FeedType, SelectedArticle } from '@/shared/interfaces'
-import { Loader } from '@/shared/ui'
 
 import { EmptyFeed } from '../empty-feed'
+import { ArticleListSkeleton } from '@/shared/ui/atoms/article-list-skeleton/article-list-skeleton'
 
 type Props = Readonly<{
   loading: boolean
@@ -41,7 +41,7 @@ export const Feed = ({
     <>
       <EmptyFeed show={isEmpty} />
       <div>{feedArticlesList}</div>
-      {loading && <Loader />}
+      {loading && <ArticleListSkeleton />}
     </>
   )
 }
