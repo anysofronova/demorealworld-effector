@@ -2,6 +2,7 @@ import { BsTrash } from 'react-icons/all'
 import { Link } from 'react-router-dom'
 
 import * as model from '@/entities/comment'
+import { useAuth } from '@/shared/hooks/useAuth'
 
 type Props = {
   createdAt: Date
@@ -21,7 +22,7 @@ export const CommentHeader = ({
   const handleDeleteComment = () => {
     model.deleteCommentFx({ slug, id: String(id) })
   }
-
+  const { user } = useAuth()
   return (
     <div className="flex gap-4 w-full relative">
       <div className="flex gap-4 w-full relative">
@@ -45,9 +46,11 @@ export const CommentHeader = ({
           </p>
         </div>
       </div>
-      <button className="cursor-pointer" onClick={handleDeleteComment}>
-        <BsTrash />
-      </button>
+      {user?.username === username && (
+        <button className="cursor-pointer" onClick={handleDeleteComment}>
+          <BsTrash />
+        </button>
+      )}
     </div>
   )
 }

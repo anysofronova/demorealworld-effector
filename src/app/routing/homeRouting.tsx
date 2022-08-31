@@ -1,8 +1,8 @@
 import { RouteObject } from 'react-router-dom'
 
 import { routes } from '@/app/routing/routes'
+import { namedLazy } from '@/shared/lib/namedLazy'
 import { Suspensy } from '@/shared/ui/suspensy'
-import { namedLazy } from '@/shared/utils/namedLazy'
 
 const HomePage = namedLazy(() => import('@/pages'), 'HomePage')
 const SettingsPage = namedLazy(() => import('@/pages'), 'SettingsPage')
@@ -21,6 +21,15 @@ export const homeRouting: RouteObject[] = [
     ),
   },
   {
+    path: routes.FEED_BY_TAG,
+    index: true,
+    element: (
+      <Suspensy>
+        <HomePage />
+      </Suspensy>
+    ),
+  },
+  {
     path: routes.SETTINGS_PAGE,
     element: (
       <Suspensy>
@@ -30,6 +39,14 @@ export const homeRouting: RouteObject[] = [
   },
   {
     path: routes.EDITOR_PAGE,
+    element: (
+      <Suspensy>
+        <EditorPage />
+      </Suspensy>
+    ),
+  },
+  {
+    path: routes.EDITOR_BY_SLUG,
     element: (
       <Suspensy>
         <EditorPage />

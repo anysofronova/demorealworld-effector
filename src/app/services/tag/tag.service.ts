@@ -1,8 +1,8 @@
-import { request } from '@/shared/http'
+import { request } from '@/shared/api/http'
 
 class TagService {
   async getAllTags() {
-    return await request<string[]>({
+    return await request<{ tags: string[] }>({
       url: '/api/tags',
       method: 'get',
     })

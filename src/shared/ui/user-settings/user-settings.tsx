@@ -2,8 +2,8 @@ import { SyntheticEvent } from 'react'
 import { AiOutlineEdit, IoSettingsOutline } from 'react-icons/all'
 import { Link } from 'react-router-dom'
 
-import { defaultImageUrl } from '@/app/config'
 import { routes } from '@/app/routing/routes'
+import { defaultImageUrl } from '@/shared/config'
 import { IUser } from '@/shared/interfaces/user.interface'
 
 type UserSettingsProps = {
@@ -14,7 +14,7 @@ type UserSettingsProps = {
 export const UserSettings = ({ user, disableMode }: UserSettingsProps) => {
   return (
     <div className="flex flex-col  gap-3 md:items-center w-full md:justify-between md:flex-row">
-      <div className="flex self-start sm:self-center">
+      <div className="flex self-start md:self-center">
         <Link
           to={routes.HOME_PAGE}
           className="text-base font-medium text-gray-500 hover:text-gray-900"

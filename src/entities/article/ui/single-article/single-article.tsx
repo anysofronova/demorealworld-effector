@@ -1,32 +1,44 @@
-import { useStoreMap } from 'effector-react'
 import { Link } from 'react-router-dom'
 
-import { $articles } from '@/entities/article'
+import { IArticle, SelectedArticle } from '@/shared/interfaces'
 
 import { ArticleContent } from '../article-content'
 import { ArticleFooter } from '../article-footer'
 import { ArticleHeader } from '../article-header'
 
-type Props = { index: number }
+type Props = Omit<IArticle, 'body' | 'updatedAt'> &
+  Readonly<{
+    onFavoriteToggle: (payload: SelectedArticle) => void
+  }>
 
-export const SingleArticle = ({ index }: Props) => {
-  const article = useStoreMap($articles, (articles) => articles[index])
-
+export const SingleArticle = ({
+  author,
+  createdAt,
+  slug,
+  title,
+  description,
+  tagList,
+  favorited,
+  favoritesCount,
+  onFavoriteToggle,
+}: Props) => {
   return (
     <div className="px-8 my-4 py-3 bg-white rounded-lg shadow-md">
       <ArticleHeader
-        createdAt={article.createdAt}
-        favoritesCount={article.favoritesCount}
+        slug={slug}
+        favorited={favorited}
+        createdAt={createdAt}
+        favoritesCount={favoritesCount}
+        tagList={tagList}
+        onClick={onFavoriteToggle}
       />
-      <Link to={`/article/${article.slug}`}>
-        <ArticleContent
-          description={article.description}
-          title={article.title}
-        />
+      <Link to={`/article/${slug}`}>
+        <ArticleContent description={description} title={title} />
       </Link>
       <ArticleFooter
-        username={article.author.username}
-        image={article.author.image}
+        username={author.username}
+        image={author.image}
+        slug={slug}
       />
     </div>
   )

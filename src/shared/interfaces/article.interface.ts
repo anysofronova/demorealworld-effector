@@ -1,22 +1,22 @@
-export interface IAuthor {
+export type IAuthor = {
   username: string
-  bio: string
+  bio: null | string
   image: string
   following: boolean
 }
 
-export interface IArticle {
-  slug: string
+export type IArticle = Readonly<{
   title: string
-  description: string
+  slug: string
   body: string
-  tagList: string[]
   createdAt: Date
   updatedAt: Date
+  tagList: readonly string[]
+  description: string
+  author: IAuthor
   favorited: boolean
   favoritesCount: number
-  author: IAuthor
-}
+}>
 
 export interface IArticleResponse {
   articles: IArticle[]
@@ -37,6 +37,16 @@ export interface ICreateArticle {
 export type TUpdateArticle = Omit<ICreateArticle, 'tagList'>
 export type UpdateArticleResponse = { article: TUpdateArticle }
 
-export interface CreateArticleResponse {
-  article: ICreateArticle
+export type FeedType = Readonly<{
+  articles: readonly IArticle[]
+  articlesCount: number
+}>
+
+export type SelectedArticle = Pick<
+  IArticle,
+  'slug' | 'favorited' | 'favoritesCount'
+>
+
+export type ToggleFavoriteArticleResponse = {
+  article: IArticle
 }

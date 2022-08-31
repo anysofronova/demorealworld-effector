@@ -1,4 +1,4 @@
-import { request } from '@/shared/http'
+import { request } from '@/shared/api/http'
 import * as types from '@/shared/interfaces'
 
 class CommentService {
@@ -17,7 +17,7 @@ class CommentService {
   }
   async deleteComment({ slug, id }: types.DeleteCommentArgs) {
     return await request({
-      url: `api/articles/${slug}/comments/${id}`,
+      url: `/api/articles/${slug}/comments/${id}`,
       method: 'delete',
     })
   }

@@ -1,5 +1,5 @@
-import { IProfileResponse } from '@/shared/interfaces'
+import { IProfile } from '@/shared/interfaces'
 
-export const saveProfileToStorage = (data: IProfileResponse) => {
-  localStorage.setItem('profile', JSON.stringify(data.profile))
+export const saveProfileToStorage = (data: IProfile) => {
+  localStorage.setItem('profile', JSON.stringify(data))
 }

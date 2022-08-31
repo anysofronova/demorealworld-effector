@@ -1,7 +1,8 @@
 import { useTitle } from 'react-use'
 
-import { Banner } from '@/pages/home/ui/banner'
-import { Tabs } from '@/pages/home/ui/tabs'
+import { Banner } from './ui/banner'
+import { Sidebar } from './ui/sidebar'
+import { Tabs } from './ui/tabs'
 
 export const HomePage = () => {
   useTitle('Home — Conduit')
@@ -14,8 +15,8 @@ export const HomePage = () => {
           <div className="sm:col-span-9 order-2">
             <Tabs />
           </div>
-          <div className="sm:col-span-3 sm:mt-6 sm:order-2 order-1 px-2">
-            <p>tabs component</p>
+          <div className="sm:col-span-3 sm:mt-6 sm:order-2 order-1 px-2 flex flex-col gap-2">
+            <Sidebar />
           </div>
         </div>
       </div>

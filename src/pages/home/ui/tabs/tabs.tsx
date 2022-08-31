@@ -1,36 +1,34 @@
 import { Tab } from '@headlessui/react'
-import { useList, useStore } from 'effector-react'
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useState } from 'react'
+import { HiOutlineHashtag } from 'react-icons/all'
+import { useLocation } from 'react-router'
+import { NavLink } from 'react-router-dom'
 
-import {
-  $articles,
-  getArticlesFx,
-  isPending,
-  SingleArticle,
-} from '@/entities/article'
+import { routes } from '@/app/routing/routes'
+import { getArticlesFx } from '@/entities/article'
+import { FeedByTagPage } from '@/pages/home/pages/feed-by-tag'
+import GlobalFeedPage from '@/pages/home/pages/global-feed'
+import { YourFeedPage } from '@/pages/home/pages/your-feed'
 import { useAuth } from '@/shared/hooks/useAuth'
-import { IArticle } from '@/shared/interfaces'
-import { ArticleListSkeleton } from '@/shared/ui'
 
 export const Tabs = memo(() => {
-  const articles = useStore($articles)
   const { user } = useAuth()
-  const isLoggedIn = Boolean(user)
-  const articlesList = useList<IArticle>($articles, {
-    keys: [articles],
-    fn: (article, index) => <SingleArticle key={article.slug} index={index} />,
-  })
-  const isLoading = useStore(isPending)
-
+  const location = useLocation()
+  const tag = location.search.split('=')[1]
+  const isAuth = Boolean(user)
+  const [selectedIndex, setSelectedIndex] = useState(!tag ? 0 : isAuth ? 2 : 1)
   useEffect(() => {
-    getArticlesFx()
-  }, [])
+    isAuth && getArticlesFx()
+  }, [isAuth])
+  useEffect(() => {
+    setSelectedIndex(!tag ? selectedIndex : isAuth ? 2 : 1)
+  }, [location, isAuth])
 
   return (
     <div className="sm:container sm:mx-auto mt-4 px-2">
-      <Tab.Group>
+      <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
         <Tab.List className="border-b border-neutral-500">
-          {isLoggedIn && (
+          <NavLink to={routes.HOME_PAGE}>
             <Tab
               className={({ selected }) =>
                 selected
@@ -38,25 +36,50 @@ export const Tabs = memo(() => {
                   : 'text-neutral-500 font-light text-lg px-4 py-2'
               }
             >
-              Your Feed
+              {isAuth ? 'Your Feed' : 'Global Feed'}
+            </Tab>
+          </NavLink>
+          {isAuth ? (
+            <NavLink to={routes.HOME_PAGE}>
+              <Tab
+                className={({ selected }) =>
+                  selected
+                    ? 'border-b-2 border-indigo-600 text-indigo-600 font-light text-lg px-4 py-2'
+                    : 'text-neutral-500 font-light text-lg px-4 py-2'
+                }
+              >
+                Global Feed
+              </Tab>
+            </NavLink>
+          ) : null}
+          {tag && (
+            <Tab
+              className={({ selected }) =>
+                selected
+                  ? 'border-b-2 border-indigo-600 text-indigo-600 font-light text-lg px-4 py-2'
+                  : 'text-neutral-500 font-light text-lg px-4 py-2'
+              }
+            >
+              <div className="flex items-center">
+                <HiOutlineHashtag className="mr-2" />
+                {tag}
+              </div>
             </Tab>
           )}
-          <Tab
-            className={({ selected }) =>
-              selected
-                ? 'border-b-2 border-indigo-600 text-indigo-600 font-light text-lg px-4 py-2'
-                : 'text-neutral-500 font-light text-lg px-4 py-2'
-            }
-          >
-            Global Feed
-          </Tab>
         </Tab.List>
         <Tab.Panels>
-          {isLoggedIn && <Tab.Panel>Content 1</Tab.Panel>}
-          {isLoading ? (
-            <ArticleListSkeleton />
-          ) : (
-            <Tab.Panel>{articlesList}</Tab.Panel>
+          {isAuth && (
+            <Tab.Panel>
+              <YourFeedPage />
+            </Tab.Panel>
+          )}
+          <Tab.Panel>
+            <GlobalFeedPage />
+          </Tab.Panel>
+          {tag && (
+            <Tab.Panel>
+              <FeedByTagPage />
+            </Tab.Panel>
           )}
         </Tab.Panels>
       </Tab.Group>

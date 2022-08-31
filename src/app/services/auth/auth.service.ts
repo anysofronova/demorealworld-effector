@@ -1,9 +1,9 @@
-import { ApiResponse } from '@/app/config/enums'
 import {
   removeTokenFromStorage,
   saveToStorage,
 } from '@/app/services/auth/auth.helper'
-import { axiosClassic } from '@/shared/http'
+import { axiosClassic } from '@/shared/api/http'
+import { ApiResponse } from '@/shared/config/enums'
 import { IUserResponse } from '@/shared/interfaces'
 
 class AuthService {

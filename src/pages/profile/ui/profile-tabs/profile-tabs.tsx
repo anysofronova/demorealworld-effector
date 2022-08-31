@@ -1,6 +1,10 @@
 import { Tab } from '@headlessui/react'
 
-export const ProfileTabs = () => {
+import { IProfileResponse } from '@/shared/interfaces'
+import { MyArticles } from '@/pages/profile/pages/my-articles'
+import { FavoritedArticles } from '@/pages/profile/pages/favorited-articles'
+
+export const ProfileTabs = ({ profile }: IProfileResponse) => {
   return (
     <div className="sm:container sm:mx-auto mt-4 px-2">
       <Tab.Group>
@@ -25,12 +29,14 @@ export const ProfileTabs = () => {
           </Tab>
         </Tab.List>
         <Tab.Panels>
-          <Tab.Panel>Content 1</Tab.Panel>
-          <Tab.Panel>Content 2</Tab.Panel>
+          <Tab.Panel>
+            <MyArticles author={profile.username} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <FavoritedArticles favorited={profile.username} />
+          </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </div>
   )
 }
-
-export default ProfileTabs

@@ -1,8 +1,8 @@
 import { RouteObject } from 'react-router-dom'
 
 import { routes } from '@/app/routing/routes'
+import { namedLazy } from '@/shared/lib/namedLazy'
 import { Suspensy } from '@/shared/ui/suspensy'
-import { namedLazy } from '@/shared/utils/namedLazy'
 
 const SignInPage = namedLazy(() => import('@/pages'), 'SignInPage')
 const SignUpPage = namedLazy(() => import('@/pages'), 'SignUpPage')

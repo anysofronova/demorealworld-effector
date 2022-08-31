@@ -7,12 +7,13 @@ import { toast } from 'react-toastify'
 
 import { authService, profileService } from '@/app'
 import { routes } from '@/app/routing/routes'
+import { saveProfileToStorage } from '@/app/services/profile/profile.helper'
 import { useAuth } from '@/shared/hooks/useAuth'
+import { makeErrors } from '@/shared/lib/makeErrors'
 import { CircleIcon } from '@/shared/ui'
 import { formValidationSchema } from '@/shared/ui/login/auth-form/form.schema'
 import { FormInput } from '@/shared/ui/molecules'
 import { FormPassword } from '@/shared/ui/molecules/form-password'
-import { makeErrors } from '@/shared/utils/makeErrors'
 
 import { AuthFormFields, IForm } from './auth-form.types'
 
@@ -51,6 +52,7 @@ export const AuthForm: FC<IForm> = ({ title, subTitle }) => {
               }
               delete user.following
               setUser(user)
+              saveProfileToStorage(user)
               toast.success('Successful authorization!')
               navigate(routes.HOME_PAGE)
             })
