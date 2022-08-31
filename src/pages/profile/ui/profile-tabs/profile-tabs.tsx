@@ -1,8 +1,14 @@
 import { Tab } from '@headlessui/react'
 
 import { IProfileResponse } from '@/shared/interfaces'
+import { useEffect } from 'react'
+import { getArticlesFx } from '@/entities/article'
+import { MyArticles } from '@/pages/profile/pages/my-articles'
 
 export const ProfileTabs = ({ profile }: IProfileResponse) => {
+  useEffect(() => {
+    getArticlesFx()
+  }, [profile])
   return (
     <div className="sm:container sm:mx-auto mt-4 px-2">
       <Tab.Group>
@@ -27,7 +33,9 @@ export const ProfileTabs = ({ profile }: IProfileResponse) => {
           </Tab>
         </Tab.List>
         <Tab.Panels>
-          <Tab.Panel>Content 1</Tab.Panel>
+          <Tab.Panel>
+            <MyArticles author={profile.username} />
+          </Tab.Panel>
           <Tab.Panel>Content 2</Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
